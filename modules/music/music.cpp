@@ -26,7 +26,7 @@ static void setPeriod(float period);
 //set period and duty cycle
 void musicInit(){
     setPeriod(0.1f);
-    setDutyCycle();
+    setMusicDutyCycle();
 }
 
 void setMusicDutyCycle()
