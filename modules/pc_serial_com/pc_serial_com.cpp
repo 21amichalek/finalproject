@@ -5,17 +5,10 @@
 
 #include "pc_serial_com.h"
 
-#include "siren.h"
-#include "fire_alarm.h"
 #include "code.h"
-#include "date_and_time.h"
-#include "temperature_sensor.h"
-#include "gas_sensor.h"
-#include "event_log.h"
-#include "motor.h"
-#include "gate.h"
-#include "motion_sensor.h"
-#include "alarm.h"
+#include "party_features.h"
+#include "lighting.h"
+#include "music.h"
 
 //=====[Declaration of private defines]========================================
 
