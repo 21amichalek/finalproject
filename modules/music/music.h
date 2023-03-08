@@ -6,6 +6,6 @@
 //=====[Libraries]=============================================================
 
 void musicInit();
-void setMusicDutyCycle();
+void setMusicDutyCycle(float dutyCycle);
 
 #endif // _MUSIC_H_
