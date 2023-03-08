@@ -5,10 +5,9 @@
 
 #include "pc_serial_com.h"
 
-#include "code.h"
-#include "party_features.h"
+
 #include "lighting.h"
-#include "music.h"
+
 
 //=====[Declaration of private defines]========================================
 
@@ -28,20 +27,17 @@ UnbufferedSerial uartUsb(USBTX, USBRX, 115200);
 
 //=====[Declaration and initialization of public global variables]=============
 
-char codeSequenceFromPcSerialCom[CODE_NUMBER_OF_KEYS];
+
 
 //=====[Declaration and initialization of private global variables]============
 
 static pcSerialComMode_t pcSerialComMode = PC_SERIAL_COMMANDS;
-static bool codeComplete = false;
-static int numberOfCodeChars = 0;
+
+
 
 //=====[Declarations (prototypes) of private functions]========================
 
 static void pcSerialComStringRead( char* str, int strLength );
-
-static void pcSerialComGetCodeUpdate( char receivedChar );
-static void pcSerialComSaveNewCodeUpdate( char receivedChar );
 
 static void pcSerialComCommandUpdate( char receivedChar );
 
@@ -83,13 +79,6 @@ void pcSerialComUpdate()
                 pcSerialComCommandUpdate( receivedChar );
             break;
 
-            case PC_SERIAL_GET_CODE:
-                pcSerialComGetCodeUpdate( receivedChar );
-            break;
-
-            case PC_SERIAL_SAVE_NEW_CODE:
-                pcSerialComSaveNewCodeUpdate( receivedChar );
-            break;
             default:
                 pcSerialComMode = PC_SERIAL_COMMANDS;
             break;
@@ -97,67 +86,29 @@ void pcSerialComUpdate()
     }    
 }
 
-bool pcSerialComCodeCompleteRead()
-{
-    return codeComplete;
-}
 
-void pcSerialComCodeCompleteWrite( bool state )
-{
-    codeComplete = state;
+
+char pMode = '\0';
+char readPartyMode() {
+    return pMode;
 }
 
 //=====[Implementations of private functions]==================================
 
-static void pcSerialComStringRead( char* str, int strLength )
-{
-    int strIndex;
-    for ( strIndex = 0; strIndex < strLength; strIndex++) {
-        uartUsb.read( &str[strIndex] , 1 );
-        uartUsb.write( &str[strIndex] ,1 );
-    }
-    str[strLength]='\0';
-}
-
-static void pcSerialComGetCodeUpdate( char receivedChar )
-{
-    codeSequenceFromPcSerialCom[numberOfCodeChars] = receivedChar;
-    pcSerialComStringWrite( "*" );
-    numberOfCodeChars++;
-   if ( numberOfCodeChars >= CODE_NUMBER_OF_KEYS ) {
-        pcSerialComMode = PC_SERIAL_COMMANDS;
-        codeComplete = true;
-        numberOfCodeChars = 0;
-    } 
-}
-
-static void pcSerialComSaveNewCodeUpdate( char receivedChar )
-{
-    static char newCodeSequence[CODE_NUMBER_OF_KEYS];
-
-    newCodeSequence[numberOfCodeChars] = receivedChar;
-    pcSerialComStringWrite( "*" );
-    numberOfCodeChars++;
-    if ( numberOfCodeChars >= CODE_NUMBER_OF_KEYS ) {
-        pcSerialComMode = PC_SERIAL_COMMANDS;
-        numberOfCodeChars = 0;
-        codeWrite( newCodeSequence );
-        pcSerialComStringWrite( "\r\nNew code configured\r\n\r\n" );
-    } 
-}
-
 static void pcSerialComCommandUpdate( char receivedChar )
 {
     switch (receivedChar) {
-        case '1': commandChillState(); break;
-        case '2': commandPartyState(); break;
-        case '3': commandRaveState(); break;
+        case '1': pMode = receivedChar; break;
+        case '2': pMode = receivedChar; break;
+        case '3': pMode = receivedChar; break;
         case 'i': case 'I': commandGetInformation(); break;
         case 's': case 'S': commandShowCustomizationSelection(); break;
-        case 's': case 'S': commandShowKeys(); break;
+        case 'k': case 'K': commandShowKeys(); break;
         default: instructions(); break;
     } 
 }
+
+
 
 static void instructions()
 {
@@ -176,23 +127,7 @@ static void instructions()
     pcSerialComStringWrite( "\r\n" );
 }
 
-static void commandChillState()
-{
-    // set color
-    // set mode
-}
 
-static void commandPartyState()
-{
-    // set colors
-    // set mode
-}
-
-static void commandRaveState() 
-{
-    // set colors
-    // set mode
-}
 
 static void commandGetInformation()
 {
