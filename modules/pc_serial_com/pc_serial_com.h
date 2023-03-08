@@ -14,7 +14,8 @@ char pcSerialComCharRead();
 void pcSerialComStringWrite( const char* str );
 void pcSerialComUpdate();
 bool pcSerialComCodeCompleteRead();
-void pcSerialComCodeCompleteWrite( bool state );
+
+char readPartyMode();
 
 //=====[#include guards - end]=================================================
 
