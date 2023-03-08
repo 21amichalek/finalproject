@@ -9,7 +9,8 @@
 
 //=====[Declaration of private data types]=====================================
 
-digitalOut musicPin(PE_11);
+//bc buzzer and sending a pwm
+PwmOut musicPin(PE_11);
 
 //=====[Declaration and initialization of public global objects]===============
 
@@ -29,6 +30,8 @@ void musicInit(){
     setMusicDutyCycle();
 }
 
+
+//changes the volume 
 void setMusicDutyCycle()
 {
     musicPin.write(MUSIC_DUTY_CYCLE);
@@ -36,8 +39,9 @@ void setMusicDutyCycle()
 
 
 //vary frequency but constant duty cycle
+//changes the note 
 static void setMusicPeriod(float period){
-
+    musicPin.period(period);
 }
 
 
