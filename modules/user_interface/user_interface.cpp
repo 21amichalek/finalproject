@@ -17,12 +17,6 @@
 
 //=====[Declaration and initialization of public global objects]===============
 
- // InterruptIn gateOpenButton(PF_9);
- // InterruptIn gateCloseButton(PF_8);
-
- // DigitalOut incorrectCodeLed(LED3);
- // DigitalOut systemBlockedLed(LED2);
-
 //=====[Declaration of external public global variables]=======================
 
 //=====[Declaration and initialization of public global variables]=============
@@ -42,6 +36,13 @@ static void userInterfaceMatrixKeypadUpdate();
 
 static void userInterfaceDisplayInit();
 static void userInterfaceDisplayUpdate();
+
+static char colorNumberToLetter(int indexColor);
+
+static void UserInterfaceDisplayUpdateMode1();
+static void UserInterfaceDisplayUpdateMode2();
+static void UserInterfaceDisplayUpdateMode3();
+static void UserInterfaceDisplayUpdateLightingMode2And3();
 
 //=====[Implementations of public functions]===================================
 
@@ -73,6 +74,16 @@ void modePartyKeypad()
     }
 }
 
+int readSong()
+{
+    int song = 0;
+    if (readMode() == 3) {
+        song = getSong();
+        // getSong() will be a function in the music 
+    }
+    return song;
+}
+
 char readColor1()
 {
     return color[0];
@@ -94,51 +105,25 @@ static void userInterfaceDisplayUpdate()
 {
     char modeString[1] = "";
     
-    // songRead() is a temporary function (hasnt been written yet)
-    // lightingRead() is a temporary function (hasnt been written yet)
-    // replace these with the correct functions
-
     sprintf(modeString, "%f", readMode());
     displayCharPositionWrite ( 6,0 );
     displayStringWrite( modeString );
 
     if ( readMode() == 1 ) {
-        displayCharPositionWrite( 14,0 );
-        displayStringWrite( "NA" );
+        userInterfaceDisplayUpdateMode1();
 
-        char lightingString[1] = "";
-
-        sprintf(lightingString, "%f", lightingRead());
-        displayCharPositionWrite( 10,1 );
-        displayStringWrite( lightingString );
     } else if ( readMode() == 2 ) {
-        displayCharPositionWrite( 14,0 );
-        displayStringWrite( "NA" );
+        userInterfaceDisplayUpdateMode2();
 
-        char lightingString[3] = "";
-
-        sprintf(lightingString, "%f", lightingRead());
-        displayCharPositionWrite( 10,1 );
-        displayStringWrite( lightingString );
-    } else {
-        char songString[2] = "";
-
-        sprintf(songString, "%f", songRead());
-        displayCharPositionWrite ( 14,0 );
-        displayStringWrite( songString );
-
-        char lightingString[3] = "";
-        
-        sprintf(lightingString, "%f", lightingRead());
-        displayCharPositionWrite( 10,1 );
-        displayStringWrite( lightingString );
+    } else if ( readMode() == 3 ) {
+        userInterfaceDisplayUpdateMode3();
     }
 }
 
 static void userInterfaceDisplayInit()
 {
     displayInit( DISPLAY_TYPE_GLCD_ST7920, DISPLAY_CONNECTION_SPI );
-    // idk if we need this but including it for now
+    // I don't know if we need this but including it for now
     displayState = DISPLAY_REPORT_STATE;
     displayRefreshTimeMs = DISPLAY_REFRESH_TIME_REPORT_MS;
 
@@ -164,4 +149,82 @@ static char userInterfaceMatrixKeypadUpdate()
         return keyReleased;
         //this part is causing me trouble I can't quite understand how to fix it       
     }
+}
+
+static char colorNumberToLetter(int indexColor);
+{
+    char colorLetter = "";
+    if ( color[indexColor] == "1" ) {
+        colorLetter = "R";
+        }
+    if ( color[indexColor] == "2" ) {
+        colorLetter = "O";
+        }
+    if ( color[indexColor] == "3" ) {
+        colorLetter = "Y";
+        }
+    if ( color[indexColor] == "4" ) {
+        colorLetter = "G";
+        }
+    if ( color[indexColor] == "5" ) {
+        colorLetter = "B";
+        }
+    if ( color[indexColor] == "6" ) {
+        colorLetter = "P";
+        }
+    if ( color[indexColor] == "7" ) {
+        colorLetter = "W";
+        }
+    return colorLetter;
+}
+
+static void UserInterfaceDisplayUpdateMode1()
+{
+    displayCharPositionWrite( 14,0 );
+    displayStringWrite( "NA" );
+
+    char lightingString[1] = "";
+
+    sprintf(lightingString, "%f", colorNumbertoLetter(readColor1()));
+    displayCharPositionWrite( 10,1 );
+    displayStringWrite( lightingString );
+}
+
+static void UserInterfaceDisplayUpdateMode2()
+{
+    displayCharPositionWrite( 14,0 );
+    displayStringWrite( "NA" ); // this writes that there is no song playing
+
+    UserInterfaceDisplayUpdateLightingMode2And3();
+}
+
+static void UserInterfaceDisplayUpdateMode3()
+{
+    char songString[2] = "";
+    sprintf(songString, "%f", songRead());
+    displayCharPositionWrite ( 14,0 );
+    displayStringWrite( songString );
+
+    UserInterfaceDisplayUpdateLightingMode2And3();
+}
+
+static void UserInterfaceDisplayUpdateLightingMode2And3()
+{
+    char lighting1String[1] = "";
+
+    sprintf(lighting1String, "%f", colorNumbertoLetter(readColor1()));
+    displayCharPositionWrite( 10,1 );
+    displayStringWrite( lighting1String );
+
+    char lighting2String[1] = "";
+
+    sprintf(lighting2String, "%f", colorNumbertoLetter(readColor2()));
+    displayCharPositionWrite( 11,1 );
+    displayStringWrite( lighting2String );
+
+    char lighting3String[1] = "";
+
+    sprintf(lighting3String, "%f", colorNumbertoLetter(readColor3()));
+    displayCharPositionWrite( 12,1 );
+    displayStringWrite( lighting3String );
 }
