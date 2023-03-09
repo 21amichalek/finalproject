@@ -12,11 +12,7 @@
 void userInterfaceInit();
 void userInterfaceUpdate();
 
-char mode1Keypad();
-void modePartyKeypad();
-char readColor1();
-char readColor2();
-char readColor3();
+char readMode1Color();
 
 //=====[#include guards - end]=================================================
 
