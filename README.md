@@ -26,10 +26,10 @@ Once the mode has been chosen, the user can further customize the party by selec
 - White --> 7
 
 #### Songs
-- 1: NAME --> A
-- 2: NAME --> B
-- 3: NAME --> C
-- 4: NAME --> D
+- 1: NAME --> Hot Cross Buns
+- 2: NAME --> An Original
+- 3: NAME --> Happy Birthday
+- 4: NAME --> Mary Had a Little Lamb
 
 The customization selections the user makes will be shown on the LCD display. The mode, lighting colors, and song number will be displayed.
 
