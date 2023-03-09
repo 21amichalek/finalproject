@@ -1,4 +1,4 @@
-# finalproject
+# ECE-218 Final Design Project
 ## Integrated Entertainment System
 
 #### by Team Triple A (Austin Gregory, Abigail Michalek, Ashley Pontillo)
