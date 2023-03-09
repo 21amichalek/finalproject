@@ -13,6 +13,7 @@ void userInterfaceInit();
 void userInterfaceUpdate();
 
 char readMode1Color();
+char readSong();
 
 //=====[#include guards - end]=================================================
 
