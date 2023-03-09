@@ -16,6 +16,21 @@ The three different party modes are chosen through the serial monitor. The user 
 
 Once the mode has been chosen, the user can further customize the party by selecting keys on the matrix keypad to select colors of lighting and songs, when applicable. Each key on the keypad corresponds with a color of lighting or song. Seven different colors and four songs can be chosen. The comprehensive instructions of this corresponence can be read through the serial monitor.
 
+#### Colors
+- Red --> 1
+- Orange --> 2
+- Yellow --> 3
+- Green --> 4
+- Blue --> 5
+- Purple --> 6
+- White --> 7
+
+#### Songs
+- 1: NAME --> A
+- 2: NAME --> B
+- 3: NAME --> C
+- 4: NAME --> D
+
 The customization selections the user makes will be shown on the LCD display. The mode, lighting colors, and song number will be displayed.
 
 To stop all party performances, the user can use their hand to inhibit light on the LDR sensor. All lighting and music will turn off. When the user wants to resume the party, they can release their hand, and the party will resume.
