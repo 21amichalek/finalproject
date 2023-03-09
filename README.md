@@ -52,8 +52,8 @@ Hardware Components
 -------------------
 The hardware this system requires and the pin connections are shown in the schematic below.
 ![Hardware Schematic](https://lh3.googleusercontent.com/kEasagN08I37e5mX_3HTPFbunfxhqe9EgBodsjEhgqVYuyBt04OjoYGvARiIrNsAxBQx2bYkxcrl-uSowxyZJbQ8Qk8oaPN85uCqph3TpQ)
-* The LEDs in the schematic are in the wrong direction *
-* The passive buzzer has been replaced by an active buzzer that is connected to the PE_14 pin *
+*The LEDs in the schematic are in the wrong direction*
+*The passive buzzer has been replaced by an active buzzer that is connected to the PE_14 pin*
 
 Each component shown in the schematic is listed below with their correposnding pin connections to the NUCLEO board:
 #### - 4x4 Matrix Keypad
@@ -87,11 +87,11 @@ Each component shown in the schematic is listed below with their correposnding p
   - Blue --> 130 resistor --> PD_12
   - GND --> GND
 #### - Active Buzzer
-  - + --> 5V
-  - - --> PE_14
+  - positive --> 5V
+  - negative --> PE_14
 #### - LDR Sensor
-  - + --> 3.3V
-  - - --> A2 and 10k resistor --> GND
+  - positive --> 3.3V
+  - negative --> A2 and 10k resistor --> GND
 #### - Serial Monitor
   - connected through UART communication
 
