@@ -42,6 +42,7 @@ void songPlayingWrite( bool state ){
     songPlaying = state;
 }
 
+//hot cross bums
 void playSong1(){
     while (songPlaying){
        setMusicDutyCycle(0.25);
@@ -56,28 +57,55 @@ void playSong1(){
        delay(1000);
        setMusicDutyCycle(0.05);
        delay(2000);
-       
     }
 }
 
+// original
 void playSong2(){
-    setMusicDutyCycle(0.25);
-    delay(1000);
-    setMusicDutyCycle(1);
-    delay(1000);
-    setMusicDutyCycle(0.25);
-    delay(1000);
-    setMusicDutyCycle(0.15);
-    delay(1000);
-
+    while (songPlaying){
+        setMusicDutyCycle(0.25);
+        delay(1000);
+        setMusicDutyCycle(1);
+        delay(1000);
+        setMusicDutyCycle(0.25);
+        delay(1000);
+        setMusicDutyCycle(0.15);
+        delay(1000);
+    }
 }
 
+//happy birthday
+//ccdcfe
 void playSong3(){
-
+    while (songPlaying){
+        setMusicDutyCycle(0.35);
+        delay(2000);
+        setMusicDutyCycle(0.25);
+        delay(1000);
+        setMusicDutyCycle(0.35);
+        delay(1000);
+        setMusicDutyCycle(0.05);
+        delay(1000);
+        setMusicDutyCycle(0.15);
+        delay(4000);
+    }
 }
 
+//mary had a little lamb
+//E D C D E E E
 void playSong4(){
-
+    while (songPlaying){
+        setMusicDutyCycle(0.15);
+        delay(1000);
+        setMusicDutyCycle(0.25);
+        delay(1000);
+        setMusicDutyCycle(0.35);
+        delay(1000);
+        setMusicDutyCycle(0.25);
+        delay(1000);
+        setMusicDutyCycle(0.15);
+        delay(3000);
+    }
 }
 
 
