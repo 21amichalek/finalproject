@@ -14,7 +14,7 @@ The three different party modes are chosen through the serial monitor. The user 
 #### Mode 2: Party ----- slow flashing multiple colored lighting
 #### Mode 3: Rave ------- fast flashing multiple colored lighting and music
 
-Once the mode has been chosen, the user can further customize the party by selecting keys on the matrix keypad to select colors of lighting and songs, when applicable. Each key on the keypad corresponds with a color of lighting or song. Seven different colors and four songs can be chosen. The comprehensive instructions of this corresponence can be read through the serial monitor.
+Once the mode has been chosen, the user can further customize the party by selecting keys on the matrix keypad to select colors of lighting and songs, when applicable. Each key on the keypad corresponds with a color of lighting or song. Seven different colors and four songs can be chosen. The comprehensive instructions of this corresponence can be read through the serial monitor. The lighting colors and song choices are shown below with their associated key on the matrix keypad:
 
 #### Colors
 - Red --> 1
