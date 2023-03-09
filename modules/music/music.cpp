@@ -22,6 +22,8 @@ bool songPlaying;
 
 static float musicPeriod = 0.0001;
 static float musicDutyCycle = 0.5;
+static int accumulatedTime = 0;
+static int timeIncrement = 10;
 
 
 
@@ -44,20 +46,34 @@ void songPlayingWrite( bool state ){
 
 //hot cross bums
 void playSong1(){
-    while (songPlaying){
-       setMusicDutyCycle(0.25);
-       delay(1000);
-       setMusicDutyCycle(0.15);
-       delay(1000);
-       setMusicDutyCycle(0.5);
-       delay(2000);
-       setMusicDutyCycle(0.25);
-       delay(1000);
-       setMusicDutyCycle(0.15);
-       delay(1000);
-       setMusicDutyCycle(0.05);
-       delay(2000);
-    }
+        accumulatedTime = 0;
+        if (accumulatedTime < 1000 ){
+            setMusicDutyCycle(0.25);
+            accumulatedTime += timeIncrement;
+        }
+        if ( 1000 < accumulatedTime < 2000){
+            setMusicDutyCycle(0.15);
+            accumulatedTime += timeIncrement;
+        }
+        if (2000 < accumulatedTime < 4000){
+            setMusicDutyCycle(0.05);
+            accumulatedTime += timeIncrement;
+        }
+        if (4000 < accumulatedTime < 5000){
+            setMusicDutyCycle(0.25);
+            accumulatedTime += timeIncrement;
+        }
+        if (5000 < accumulatedTime < 6000){
+            setMusicDutyCycle(0.15);
+            accumulatedTime += timeIncrement;
+        }
+        if (6000 < accumulatedTime < 8000){
+            setMusicDutyCycle(0.05);
+            accumulatedTime += timeIncrement;
+        }
+        if (accumulatedTime > 9000){
+            accumulatedTime = 0;
+        }
 }
 
 // original
@@ -108,10 +124,38 @@ void playSong4(){
     }
 }
 
+void test(){
+    setMusicDutyCycle(0.15);
+    delay(1000);
+    setMusicDutyCycle(1);
+    delay(2000);
+}
+
 
 //changes the volume 
 void setMusicDutyCycle(float dutyCycle){
     musicPin.write(dutyCycle);
+}
+
+void setMusic(char song){
+    switch(song){
+        case 'A':
+            playSong1();
+        break;
+
+        case 'B':
+            playSong2();
+        break;
+
+        case 'C':
+            playSong3();
+        break;
+
+        case 'D':
+            playSong4();
+        break;
+    }
+
 }
 
 
