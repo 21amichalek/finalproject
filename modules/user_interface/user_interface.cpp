@@ -74,7 +74,7 @@ void modePartyKeypad()
     }
 }
 
-int readSong()
+/* int readSong()
 {
     int song = 0;
     if (readMode() == 3) {
@@ -83,7 +83,7 @@ int readSong()
     }
     return song;
 }
-
+*/ 
 char readColor1()
 {
     return color[0];
