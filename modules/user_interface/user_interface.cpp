@@ -52,7 +52,7 @@ void userInterfaceInit()
 
 void userInterfaceUpdate()
 {
-    userInterfaceMatrixKeypadUpdate();
+    Mode1ColorUpdate();
     userInterfaceDisplayUpdate();
 }
 
@@ -74,7 +74,7 @@ char readMode1Color(){
 
 
 //=====[Implementations of private functions]==================================
-static void userInterfaceMatrixKeypadUpdate()
+static void Mode1ColorUpdate()
 {
     char keyReleased = matrixKeypadUpdate();
     if( keyReleased != '\0' ) {
