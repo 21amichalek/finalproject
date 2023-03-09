@@ -30,7 +30,8 @@ static int displayRefreshTimeMs = DISPLAY_REFRESH_TIME_REPORT_MS;
 
 //=====[Declarations (prototypes) of private functions]========================
 
-static void userInterfaceMatrixKeypadUpdate();
+static void Mode1ColorUpdate();
+static void songUpdate();
 
 static void userInterfaceDisplayInit();
 static void userInterfaceDisplayUpdate();
@@ -61,15 +62,8 @@ char readMode1Color(){
 }
 
 
-
-/* int readSong()
-{
-    int song = 0;
-    if (readMode() == 3) {
-        song = getSong();
-        // getSong() will be a function in the music 
-    }
-    return song;
+char readSong(){
+    return songPick;
 }
 
 
@@ -82,6 +76,15 @@ static void Mode1ColorUpdate()
         
     }             
 }
+
+static void songUpdate() {
+    char keyReleased = matrixKeypadUpdate();
+    if( keyReleased != '\0' ) {
+        songPick = keyReleased;
+        
+    }
+ }
+
 static void userInterfaceDisplayUpdate()
 {
     char modeString[1] = "";
