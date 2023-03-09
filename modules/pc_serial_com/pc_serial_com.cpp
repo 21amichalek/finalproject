@@ -5,9 +5,10 @@
 
 #include "pc_serial_com.h"
 
-
+#include "code.h"
+#include "party_features.h"
 #include "lighting.h"
-
+#include "music.h"
 
 //=====[Declaration of private defines]========================================
 
@@ -27,27 +28,38 @@ UnbufferedSerial uartUsb(USBTX, USBRX, 115200);
 
 //=====[Declaration and initialization of public global variables]=============
 
-
+char codeSequenceFromPcSerialCom[CODE_NUMBER_OF_KEYS];
+int modeState;
 
 //=====[Declaration and initialization of private global variables]============
 
 static pcSerialComMode_t pcSerialComMode = PC_SERIAL_COMMANDS;
-
-
+static bool codeComplete = false;
+static int numberOfCodeChars = 0;
 
 //=====[Declarations (prototypes) of private functions]========================
 
 static void pcSerialComStringRead( char* str, int strLength );
 
+static void pcSerialComGetCodeUpdate( char receivedChar );
+static void pcSerialComSaveNewCodeUpdate( char receivedChar );
+
 static void pcSerialComCommandUpdate( char receivedChar );
 
 static void instructions();
+
 static void commandChillState();
 static void commandPartyState();
 static void commandRaveState();
 static void commandGetInformation();
 static void commandShowCustomizationSelection();
 static void commandShowKeys();
+
+static void setColorInstructionsMode1();
+static void setColorInstructionsMode2And3();
+static void setSongInstructions();
+static void lightingMatrixKeysInstructions();
+static void musicMatrixKeysInstructions();
 
 //=====[Implementations of public functions]===================================
 
@@ -79,6 +91,13 @@ void pcSerialComUpdate()
                 pcSerialComCommandUpdate( receivedChar );
             break;
 
+            case PC_SERIAL_GET_CODE:
+                pcSerialComGetCodeUpdate( receivedChar );
+            break;
+
+            case PC_SERIAL_SAVE_NEW_CODE:
+                pcSerialComSaveNewCodeUpdate( receivedChar );
+            break;
             default:
                 pcSerialComMode = PC_SERIAL_COMMANDS;
             break;
@@ -86,29 +105,66 @@ void pcSerialComUpdate()
     }    
 }
 
+bool pcSerialComCodeCompleteRead()
+{
+    return codeComplete;
+}
 
-
-char pMode = '\0';
-char readPartyMode() {
-    return pMode;
+void pcSerialComCodeCompleteWrite( bool state )
+{
+    codeComplete = state;
 }
 
 //=====[Implementations of private functions]==================================
 
+static void pcSerialComStringRead( char* str, int strLength )
+{
+    int strIndex;
+    for ( strIndex = 0; strIndex < strLength; strIndex++) {
+        uartUsb.read( &str[strIndex] , 1 );
+        uartUsb.write( &str[strIndex] ,1 );
+    }
+    str[strLength]='\0';
+}
+
+static void pcSerialComGetCodeUpdate( char receivedChar )
+{
+    codeSequenceFromPcSerialCom[numberOfCodeChars] = receivedChar;
+    pcSerialComStringWrite( "*" );
+    numberOfCodeChars++;
+   if ( numberOfCodeChars >= CODE_NUMBER_OF_KEYS ) {
+        pcSerialComMode = PC_SERIAL_COMMANDS;
+        codeComplete = true;
+        numberOfCodeChars = 0;
+    } 
+}
+
+static void pcSerialComSaveNewCodeUpdate( char receivedChar )
+{
+    static char newCodeSequence[CODE_NUMBER_OF_KEYS];
+
+    newCodeSequence[numberOfCodeChars] = receivedChar;
+    pcSerialComStringWrite( "*" );
+    numberOfCodeChars++;
+    if ( numberOfCodeChars >= CODE_NUMBER_OF_KEYS ) {
+        pcSerialComMode = PC_SERIAL_COMMANDS;
+        numberOfCodeChars = 0;
+        codeWrite( newCodeSequence );
+        pcSerialComStringWrite( "\r\nNew code configured\r\n\r\n" );
+    } 
+}
+
 static void pcSerialComCommandUpdate( char receivedChar )
 {
     switch (receivedChar) {
-        case '1': pMode = receivedChar; break;
-        case '2': pMode = receivedChar; break;
-        case '3': pMode = receivedChar; break;
+        case '1': commandChillState(); break;
+        case '2': commandPartyState(); break;
+        case '3': commandRaveState(); break;
         case 'i': case 'I': commandGetInformation(); break;
-        case 's': case 'S': commandShowCustomizationSelection(); break;
         case 'k': case 'K': commandShowKeys(); break;
         default: instructions(); break;
     } 
 }
-
-
 
 static void instructions()
 {
@@ -121,13 +177,29 @@ static void instructions()
     pcSerialComStringWrite( "Press '1' to select Chill\r\n" );
     pcSerialComStringWrite( "Press '2' to select Party\r\n" );
     pcSerialComStringWrite( "Press '3' to select Rave\r\n\r\n" );
-    pcSerialComStringWrite( "Press 's' or 'S' to show current customization selections\r\n" );
     pcSerialComStringWrite( "Press 'i' or 'I' to show information about each entertainment mode\r\n" );
     pcSerialComStringWrite( "Press 'k' or 'K' to show the keypad's customization buttons\r\n");
     pcSerialComStringWrite( "\r\n" );
 }
 
+static void commandChillState()
+{
+    modeState = 1;
+    setColorInstructionsMode1();
+}
 
+static void commandPartyState()
+{
+    modeState = 2;
+    setColorInstructionsMode2And3();
+}
+
+static void commandRaveState() 
+{
+    modeState = 3;
+    setColorInstructionsMode2And3();
+    setSongInstructions();
+}
 
 static void commandGetInformation()
 {
@@ -143,17 +215,39 @@ static void commandGetInformation()
     pcSerialComStringWrite( "Select a song to be played\r\n\r\n");
 }
 
-static void commandShowCustomizationSelection()
-{
-    // show current mode
-    // show current color(s)
-    // show current song
-}
-
 static void commandShowKeys()
 {
     pcSerialComStringWrite( "To select a lighting color or song, press the according key on the keypad:\r\n\r\n");
+    lightingMatrixKeysInstructions();
+    musicMatrixKeysInstructions();
+}
+
+static void setColorInstructionsMode1()
+{
+    pcSerialComStringWrite( "Now you may select a color of lighting on the keypad.\r\n");
+    pcSerialComStringWrite( "Press the according key on the keypad for the desired lighting:\r\n\r\n");
     
+    lightingMatrixKeysInstructions();
+}
+
+static void setColorInstructionsMode2And3()
+{
+    pcSerialComStringWrite( "Now you may select three colors of lighting on the keypad.\r\n");
+    pcSerialComStringWrite( "Press the according keys on the keypad for the desired lighting:\r\n\r\n");
+    
+    lightingMatrixKeysInstructions();
+}
+
+static void setSongInstructions()
+{
+    pcSerialComStringWrite( "Now you may select a song on the keypad.\r\n");
+    pcSerialComStringWrite( "Press the according key on the keypad for the desired music:\r\n\r\n");
+    
+    musicMatrixKeysInstructions();
+}
+
+static void lightingMatrixKeysInstructions()
+{
     pcSerialComStringWrite( "Lighting Colors:\r\n");
     pcSerialComStringWrite( "----------------\r\n");
     pcSerialComStringWrite( "Red: press '1'\r\n");
@@ -163,7 +257,10 @@ static void commandShowKeys()
     pcSerialComStringWrite( "Blue: press '5'\r\n");
     pcSerialComStringWrite( "Purple: press '6'\r\n");
     pcSerialComStringWrite( "White: press '7'\r\n\r\n");
-    
+}
+
+static void musicMatrixKeysInstructions()
+{
     pcSerialComStringWrite( "Songs:\r\n");
     pcSerialComStringWrite( "----------------\r\n");
     pcSerialComStringWrite( "Song 1: press 'A'\r\n");
