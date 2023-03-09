@@ -7,16 +7,16 @@ Submitted on 03/10/23
 
 Summary of Behavior
 -------------------
-The integrated entertainment system is the future of party entertainment! Lighting and music are brought together in an all-in-one personalizable system. This system allows for party customization through the use of multiple party modes. The modes will be chosen by the user and can be further customized to fit the specific vibe of the party. The user can personalize the party by choosing different colored lights, strobe intensity, and sounds. If the party needs to be paused for any reason, there is a single input that stops all activities.
+The integrated entertainment system is the future of party entertainment! Lighting and music are brought together in an all-in-one, personalizable system. This system allows for party customization through the use of multiple party modes. The modes will be chosen by the user and can be further customized to fit the specific vibe of the party. The user can personalize the party by choosing different colored lights, strobe intensity, and sounds. If the party needs to be paused for any reason, there is a single input that stops all activities.
 
-The three different party modes are chosen through the serial monitor. The use can select from the following options by pressing the corresponding number key on their computer keyboard:
+The three different party modes are chosen through the serial monitor. The user can select from the following options by pressing the corresponding number key on their computer keyboard:
 #### Mode 1: Chill ----- single colored lighting
 #### Mode 2: Party ----- slow flashing multiple colored lighting
 #### Mode 3: Rave ------- fast flashing multiple colored lighting and music
 
-Once the mode has been chosen, the user can further customize the party by selecting keys on the matrix keypad to select colors of lighting and songs when applicable. Each key on the keypad corresponds with a color of lighting or song. The comphehensive instructions of this correpsondance can be read through the serial monitor.
+Once the mode has been chosen, the user can further customize the party by selecting keys on the matrix keypad to select colors of lighting and songs, when applicable. Each key on the keypad corresponds with a color of lighting or song. The comprehensive instructions of this corresponence can be read through the serial monitor.
 
-To stop all party performances, the user can use their hand to inhibit light on the LDR sensor. All lighting and music will turn off. When the user wants to resume the party, they can release their hand and the party will resume.
+To stop all party performances, the user can use their hand to inhibit light on the LDR sensor. All lighting and music will turn off. When the user wants to resume the party, they can release their hand, and the party will resume.
 
 Code Modules
 ------------
@@ -28,13 +28,13 @@ This module manages the functionality of all the subsystems.
 This module controls the distinct party modes of the system by implementing their behaviors.
   
 #### User Interface --- modified textbook User Interface module
-This module manages the user interface through controlling the lighting, music, and input           recieved from the matrix keypad and serial communication.
+This module manages the user interface through controlling the lighting, music, and input           received from the matrix keypad and serial communication.
   
 #### PC Serial Communication --- modified textbook PC Serial Communication module
 This module manages the communication with the PC through sending / receiving data.
 
 #### Lighting --- written from scratch
-This module drives the light implemented by a RGB LED.
+This module drives the light implemented by an RGB LED.
     
 #### Music --- written from scratch
 This module drives the songs played by an active buzzer.
@@ -52,11 +52,11 @@ Hardware Components
 -------------------
 The hardware this system requires and the pin connections are shown in the schematic below.
 ![Hardware Schematic](https://lh3.googleusercontent.com/kEasagN08I37e5mX_3HTPFbunfxhqe9EgBodsjEhgqVYuyBt04OjoYGvARiIrNsAxBQx2bYkxcrl-uSowxyZJbQ8Qk8oaPN85uCqph3TpQ)
-*The LEDs in the schematic are in the wrong direction*
+*The LEDs in the schematic are facing the wrong direction*
 
 *The passive buzzer has been replaced by an active buzzer that is connected to the PE_14 pin*
 
-Each component shown in the schematic is listed below with their correposnding pin connections to the NUCLEO board:
+Each component shown in the schematic is listed below, along with their corresponding pin connections to the NUCLEO board:
 #### - 4x4 Matrix Keypad
   - R1 --> PB_3
   - R2 --> PB_5
@@ -98,6 +98,8 @@ Each component shown in the schematic is listed below with their correposnding p
 
 Tests Performed
 ---------------
+WRITE LATER
 
 Other Details
 -------------
+N/A
