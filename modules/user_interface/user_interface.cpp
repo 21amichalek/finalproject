@@ -2,9 +2,7 @@
 
 #include "mbed.h"
 #include "arm_book_lib.h"
-
 #include "user_interface.h"
-
 #include "lighting.h"
 #include "music.h"
 #include "display.h"
@@ -24,11 +22,11 @@
 char codeSequenceFromUserInterface[CODE_NUMBER_OF_KEYS];
 
 //=====[Declaration and initialization of private global variables]============
-
+static char colorPick;
 static displayState_t displayState = DISPLAY_REPORT_STATE;
 static int displayRefreshTimeMs = DISPLAY_REFRESH_TIME_REPORT_MS;
 
-char color[] = {'8','8','8'};
+
 
 //=====[Declarations (prototypes) of private functions]========================
 
@@ -56,23 +54,13 @@ void userInterfaceUpdate()
 {
     userInterfaceMatrixKeypadUpdate();
     userInterfaceDisplayUpdate();
-
-    mode1Keypad();
-    modePartyKeypad();
 }
 
-char mode1Keypad()
-{
-    return userInterfaceMatrixKeypadUpdate();
+char readMode1Color(){
+    return colorPick;
 }
 
-void modePartyKeypad()
-{
-    int i = 0;
-    for (i = 0; i < 3; i++) {
-        color[i] = userInterfaceMatrixKeypadUpdate();
-    }
-}
+
 
 /* int readSong()
 {
@@ -83,24 +71,17 @@ void modePartyKeypad()
     }
     return song;
 }
-*/ 
-char readColor1()
-{
-    return color[0];
-}
 
-char readColor2()
-{
-    return color[1];
-}
-
-char readColor3()
-{
-    return color[2];
-}
 
 //=====[Implementations of private functions]==================================
-
+static void userInterfaceMatrixKeypadUpdate()
+{
+    char keyReleased = matrixKeypadUpdate();
+    if( keyReleased != '\0' ) {
+        colorPick = keyReleased;
+        
+    }             
+}
 static void userInterfaceDisplayUpdate()
 {
     char modeString[1] = "";
@@ -141,15 +122,7 @@ static void userInterfaceDisplayInit()
     displayStringWrite( "Song: " );
 }
 
-static char userInterfaceMatrixKeypadUpdate()
-{ 
-    char keyReleased = matrixKeypadUpdate();
-    
-    if( keyReleased == '1'||'2'||'3'||'4'||'5'||'6'||'7') {
-        return keyReleased;
-        //this part is causing me trouble I can't quite understand how to fix it       
-    }
-}
+
 
 static char colorNumberToLetter(int indexColor);
 {
