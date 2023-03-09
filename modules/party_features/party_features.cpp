@@ -41,11 +41,6 @@ void PartyInit(){
     brightControlInit();
 
     PartyState = PARTY_MODE_SCANNING;
-
-    
-
-
-
 }
 
 void PartyUpdate(){
