@@ -60,7 +60,7 @@ void PartyUpdate()
     case PARTY_MODE_SCANNING:
         
         if ( partyStop() ) {
-            PartyState = PARTY_MODE_SCANNING;
+            PartyState = PARTY_OFF;
         }
 
         else if (readPartyMode() == '1') {
@@ -78,21 +78,21 @@ void PartyUpdate()
 
     case PARTY_MODE_1:
         if ( partyStop() ) {
-            PartyState = PARTY_MODE_SCANNING;
+            PartyState = PARTY_OFF;
         }
         mode1Color(mode1Keypad());
         break;
 
     case PARTY_MODE_2:
         if ( partyStop() ) {
-            PartyState = PARTY_MODE_SCANNING;
+            PartyState = PARTY_OFF;
         }
          mode2Color(readColor1(), readColor2(), readColor3());
         break;
     
     case PARTY_MODE_3:
         if ( partyStop() ) {
-            PartyState = PARTY_MODE_SCANNING;
+            PartyState = PARTY_OFF;
         }
          mode3Color(readColor1(), readColor2(), readColor3());
         break;
