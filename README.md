@@ -99,7 +99,9 @@ Each component shown in the schematic is listed below, along with their correspo
 Tests Performed
 ---------------
 WRITE LATER
+A description of the tests you performed on the system, and the results.
 
 Other Details
 -------------
 N/A
+Any other details that will help the reader understand your code.
