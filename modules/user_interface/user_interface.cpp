@@ -9,6 +9,7 @@
 #include "music.h"
 #include "display.h"
 #include "matrix_keypad.h"
+#include "pc_serial_com.h"
 
 //=====[Declaration of private defines]========================================
 
@@ -93,16 +94,15 @@ static void userInterfaceDisplayUpdate()
 {
     char modeString[1] = "";
     
-    // modeRead() is a temporary function (hasnt been written yet)
     // songRead() is a temporary function (hasnt been written yet)
     // lightingRead() is a temporary function (hasnt been written yet)
     // replace these with the correct functions
 
-    sprintf(modeString, "%f", modeRead());
+    sprintf(modeString, "%f", readMode());
     displayCharPositionWrite ( 6,0 );
     displayStringWrite( modeString );
 
-    if ( modeRead() == 1 ) {
+    if ( readMode() == 1 ) {
         displayCharPositionWrite( 14,0 );
         displayStringWrite( "NA" );
 
@@ -111,7 +111,7 @@ static void userInterfaceDisplayUpdate()
         sprintf(lightingString, "%f", lightingRead());
         displayCharPositionWrite( 10,1 );
         displayStringWrite( lightingString );
-    } else if ( modeRead() == 2 ) {
+    } else if ( readMode() == 2 ) {
         displayCharPositionWrite( 14,0 );
         displayStringWrite( "NA" );
 
