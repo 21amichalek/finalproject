@@ -53,6 +53,7 @@ Hardware Components
 The hardware this system requires and the pin connections are shown in the schematic below.
 ![Hardware Schematic](https://lh3.googleusercontent.com/kEasagN08I37e5mX_3HTPFbunfxhqe9EgBodsjEhgqVYuyBt04OjoYGvARiIrNsAxBQx2bYkxcrl-uSowxyZJbQ8Qk8oaPN85uCqph3TpQ)
 *The LEDs in the schematic are in the wrong direction*
+
 *The passive buzzer has been replaced by an active buzzer that is connected to the PE_14 pin*
 
 Each component shown in the schematic is listed below with their correposnding pin connections to the NUCLEO board:
