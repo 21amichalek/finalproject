@@ -29,13 +29,14 @@ UnbufferedSerial uartUsb(USBTX, USBRX, 115200);
 //=====[Declaration and initialization of public global variables]=============
 
 char codeSequenceFromPcSerialCom[CODE_NUMBER_OF_KEYS];
-int modeState;
 
 //=====[Declaration and initialization of private global variables]============
 
 static pcSerialComMode_t pcSerialComMode = PC_SERIAL_COMMANDS;
 static bool codeComplete = false;
 static int numberOfCodeChars = 0;
+
+int modeState = 0;
 
 //=====[Declarations (prototypes) of private functions]========================
 
@@ -113,6 +114,11 @@ bool pcSerialComCodeCompleteRead()
 void pcSerialComCodeCompleteWrite( bool state )
 {
     codeComplete = state;
+}
+
+int readMode()
+{
+    return modeState;
 }
 
 //=====[Implementations of private functions]==================================
