@@ -2,10 +2,7 @@
 
 #include "mbed.h"
 #include "arm_book_lib.h"
-
 #include "pc_serial_com.h"
-
-#include "code.h"
 #include "party_features.h"
 #include "lighting.h"
 #include "music.h"
