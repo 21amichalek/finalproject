@@ -16,7 +16,7 @@ void pcSerialComUpdate();
 bool pcSerialComCodeCompleteRead();
 void pcSerialComCodeCompleteWrite( bool state );
 
-int readMode();
+char readPartyMode();
 
 //=====[#include guards - end]=================================================
 
