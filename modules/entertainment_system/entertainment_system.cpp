@@ -26,13 +26,13 @@
 void entertainmentSystemInit()
 {
     userInterfaceInit();
-    partySystemInit();
+    PartyInit();
 }
 
 void smartHomeSystemUpdate()
 {
     userInterfaceUpdate();
-    partySystemUpdate();
+    PartyUpdate();
     delay(SYSTEM_TIME_INCREMENT_MS);
 }
 
