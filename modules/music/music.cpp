@@ -6,7 +6,7 @@
 
 //=====[Declaration of private defines]========================================
 
-#define MUSIC_DUTY_CYCLE    0.5
+#define TIME_INCREMENT   10
 
 //=====[Declaration of private data types]=====================================
 
@@ -22,8 +22,15 @@ bool songPlaying;
 
 static float musicPeriod = 0.0001;
 static float musicDutyCycle = 0.5;
+static float dutyCycleOff = 1.0;
 static int accumulatedTime;
-static int timeIncrement = 10;
+static float A = 0.000440;
+static float B = 0.000494;
+static float C = 0.000523; 
+static float D = 0.000587;
+static float E = 0.000659;
+static float G = 0.000784;
+static float F = 0.000698;
 
 
 
@@ -47,88 +54,137 @@ void songPlayingWrite( bool state ){
 
 //hot cross bums
 void playSong1(){
-        if (accumulatedTime < 1000 ){
-            setMusicDutyCycle(1);
-            accumulatedTime += timeIncrement;
-        }
-        if ( 1000 < accumulatedTime && accumulatedTime < 2000){
-            setMusicDutyCycle(0.15);
-            accumulatedTime += timeIncrement;
-        }
-        if (2000 < accumulatedTime && accumulatedTime < 4000){
-            setMusicDutyCycle(0.05);
-            accumulatedTime += timeIncrement;
-        }
-        if (4000 < accumulatedTime && accumulatedTime < 5000){
-            setMusicDutyCycle(0.25);
-            accumulatedTime += timeIncrement;
-        }
-        if (5000 < accumulatedTime && accumulatedTime < 6000){
-            setMusicDutyCycle(0.15);
-            accumulatedTime += timeIncrement;
-        }
-        if (6000 < accumulatedTime && accumulatedTime < 8000){
-            setMusicDutyCycle(0.05);
-            accumulatedTime += timeIncrement;
-        }
-        if (accumulatedTime > 9000){
-            accumulatedTime = 0;
-        }
+    if (accumulatedTime < 1000 ){
+        musicPin.period(B);
+        accumulatedTime += TIME_INCREMENT;
+    } 
+    else if ( (1000 <= accumulatedTime) && (accumulatedTime < 2000)){
+        musicPin.period(A);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else if (2000 <= accumulatedTime && accumulatedTime < 4000){
+        musicPin.period(G);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else if (4000 <= accumulatedTime && accumulatedTime < 5000){
+        musicPin.period(B);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else if (5000 <= accumulatedTime && accumulatedTime < 6000){
+        musicPin.period(A);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else if (6000 <= accumulatedTime && accumulatedTime < 8000){
+        musicPin.period(G);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else{
+        accumulatedTime = 0;
+    }
 }
 
-// original
+// twinkle twinkle little star
+// ccggaag
 void playSong2(){
-    while (songPlaying){
-        setMusicDutyCycle(0.25);
-        delay(1000);
-        setMusicDutyCycle(1);
-        delay(1000);
-        setMusicDutyCycle(0.25);
-        delay(1000);
-        setMusicDutyCycle(0.15);
-        delay(1000);
+    if (accumulatedTime < 1000 ){
+        musicPin.period(C);
+        accumulatedTime += TIME_INCREMENT;
+    } 
+    else if ( (1000 <= accumulatedTime) && (accumulatedTime < 2000)){
+        musicPin.period(C);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else if (2000 <= accumulatedTime && accumulatedTime < 3000){
+        musicPin.period(G);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else if ( (3000 <= accumulatedTime) && (accumulatedTime < 4000)){
+        musicPin.period(G);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else if (4000 <= accumulatedTime && accumulatedTime < 5000){
+        musicPin.period(A);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else if (5000 <= accumulatedTime && accumulatedTime < 6000){
+        musicPin.period(A);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else if (6000 <= accumulatedTime && accumulatedTime < 8000){
+        musicPin.period(G);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else{
+        accumulatedTime = 0;
     }
 }
 
 //happy birthday
 //ccdcfe
 void playSong3(){
-    while (songPlaying){
-        setMusicDutyCycle(0.35);
-        delay(2000);
-        setMusicDutyCycle(0.25);
-        delay(1000);
-        setMusicDutyCycle(0.35);
-        delay(1000);
-        setMusicDutyCycle(0.05);
-        delay(1000);
-        setMusicDutyCycle(0.15);
-        delay(4000);
+    if (accumulatedTime < 1000 ){
+        musicPin.period(C);
+        accumulatedTime += TIME_INCREMENT;
+    } 
+    else if ( (1000 <= accumulatedTime) && (accumulatedTime < 2000)){
+        musicPin.period(C);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else if (2000 <= accumulatedTime && accumulatedTime < 3000){
+        musicPin.period(D);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else if ( (3000 <= accumulatedTime) && (accumulatedTime < 4000)){
+        musicPin.period(C);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else if (4000 <= accumulatedTime && accumulatedTime < 5000){
+        musicPin.period(F);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else if (5000 <= accumulatedTime && accumulatedTime < 7000){
+        musicPin.period(E);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else{
+        accumulatedTime = 0;
     }
 }
 
 //mary had a little lamb
 //E D C D E E E
 void playSong4(){
-    while (songPlaying){
-        setMusicDutyCycle(0.15);
-        delay(1000);
-        setMusicDutyCycle(1);;
-        delay(1000);
-        setMusicDutyCycle(0.05);
-        delay(1000);
-        setMusicDutyCycle(1);;
-        delay(1000);
-        setMusicDutyCycle(0.25);
-        delay(3000);
+    if (accumulatedTime < 1000 ){
+        musicPin.period(E);
+        accumulatedTime += TIME_INCREMENT;
+    } 
+    else if ( (1000 <= accumulatedTime) && (accumulatedTime < 2000)){
+        musicPin.period(D);
+        accumulatedTime += TIME_INCREMENT;
     }
-}
-
-void test(){
-    setMusicDutyCycle(0.15);
-    delay(1000);
-    setMusicDutyCycle(1);
-    delay(2000);
+    else if (2000 <= accumulatedTime && accumulatedTime < 3000){
+        musicPin.period(C);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else if ( (3000 <= accumulatedTime) && (accumulatedTime < 4000)){
+        musicPin.period(D);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else if (4000 <= accumulatedTime && accumulatedTime < 5000){
+        musicPin.period(E);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else if (5000 <= accumulatedTime && accumulatedTime < 6000){
+        musicPin.period(E);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else if (6000 <= accumulatedTime && accumulatedTime < 8000){
+        musicPin.period(E);
+        accumulatedTime += TIME_INCREMENT;
+    }
+    else{
+        accumulatedTime = 0;
+    }
 }
 
 
