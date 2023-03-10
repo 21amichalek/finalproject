@@ -8,6 +8,7 @@
 #include "display.h"
 #include "matrix_keypad.h"
 #include "pc_serial_com.h"
+#include "entertainment_system.h"
 
 //=====[Declaration of private defines]========================================
 
@@ -18,8 +19,6 @@
 //=====[Declaration of external public global variables]=======================
 
 //=====[Declaration and initialization of public global variables]=============
-
-char codeSequenceFromUserInterface[CODE_NUMBER_OF_KEYS];
 
 //=====[Declaration and initialization of private global variables]============
 static char colorPick;
@@ -96,13 +95,13 @@ static void userInterfaceDisplayUpdate()
     displayStringWrite( modeString );
 */
     if ( readPartyMode() == '1' ) {
-        userInterfaceDisplayUpdateMode1();
+        UserInterfaceDisplayUpdateMode1();
 
     } else if ( readPartyMode() == '2' ) {
-        userInterfaceDisplayUpdateMode2();
+        UserInterfaceDisplayUpdateMode2();
 
     } else if ( readPartyMode() == '3' ) {
-        userInterfaceDisplayUpdateMode3();
+        UserInterfaceDisplayUpdateMode3();
     }
 }
 
