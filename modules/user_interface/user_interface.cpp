@@ -134,16 +134,16 @@ static char colorNumberToLetter(int indexColor);
         colorLetter = "R";
         }
     if ( color[indexColor] == "2" ) {
-        colorLetter = "O";
-        }
-    if ( color[indexColor] == "3" ) {
         colorLetter = "Y";
         }
-    if ( color[indexColor] == "4" ) {
+    if ( color[indexColor] == "3" ) {
         colorLetter = "G";
         }
-    if ( color[indexColor] == "5" ) {
+    if ( color[indexColor] == "4" ) {
         colorLetter = "B";
+        }
+    if ( color[indexColor] == "5" ) {
+        colorLetter = "I";
         }
     if ( color[indexColor] == "6" ) {
         colorLetter = "P";
