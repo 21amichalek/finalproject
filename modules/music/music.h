@@ -12,7 +12,6 @@ void playSong1();
 void playSong2();
 void playSong3();
 void playSong4();
-void setMusic();
-void test();
+void setMusic(char song);
 
 #endif // _MUSIC_H_
