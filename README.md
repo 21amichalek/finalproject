@@ -18,10 +18,10 @@ Once the mode has been chosen, the user can further customize the party by selec
 
 #### Colors
 - Red --> 1
-- Orange --> 2
-- Yellow --> 3
-- Green --> 4
-- Blue --> 5
+- Yellow --> 2
+- Green --> 3
+- Blue --> 4
+- Indigo --> 5
 - Purple --> 6
 - White --> 7
 
