@@ -128,8 +128,7 @@ static void userInterfaceDisplayInit()
 
 
 
-static char colorNumberToLetter();
-{
+static char colorNumberToLetter(){
     char colorNumber = readMode1Color();
     char colorLetter = "";
     if ( colorNumber == '1' ) {
