@@ -3,7 +3,8 @@
 #include "arm_book_lib.h"
 #include "mbed.h"
 #include "lighting.h"
-#include "smart_home_system.h"
+#include "party_features.h"
+#include "music.h"
 #include "matrix_keypad.h"
 #include "party_features.h"
 #include "pc_serial_com.h"
@@ -91,7 +92,7 @@ void PartyUpdate(){
          if ( partyStop() ) {
             PartyState = PARTY_OFF;
         }
-        
+        setMusic(readSong()); 
         break;
     }
     
