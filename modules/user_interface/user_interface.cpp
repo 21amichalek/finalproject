@@ -23,6 +23,7 @@ char codeSequenceFromUserInterface[CODE_NUMBER_OF_KEYS];
 
 //=====[Declaration and initialization of private global variables]============
 static char colorPick;
+static char songPick;
 static displayState_t displayState = DISPLAY_REPORT_STATE;
 static int displayRefreshTimeMs = DISPLAY_REFRESH_TIME_REPORT_MS;
 
@@ -54,6 +55,7 @@ void userInterfaceInit()
 void userInterfaceUpdate()
 {
     Mode1ColorUpdate();
+    songUpdate();
     userInterfaceDisplayUpdate();
 }
 
