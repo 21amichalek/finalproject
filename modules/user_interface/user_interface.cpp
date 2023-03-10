@@ -19,6 +19,8 @@
 
 //=====[Declaration and initialization of public global variables]=============
 
+char codeSequenceFromUserInterface[CODE_NUMBER_OF_KEYS];
+
 //=====[Declaration and initialization of private global variables]============
 static char colorPick;
 static char songPick;
@@ -88,18 +90,18 @@ static void songUpdate() {
 static void userInterfaceDisplayUpdate()
 {
     char modeString[1] = "";
-    
+    /*
     sprintf(modeString, "%f", readPartyMode());
     displayCharPositionWrite ( 6,0 );
     displayStringWrite( modeString );
-
-    if ( readPartyMode() == 1 ) {
+*/
+    if ( readPartyMode() == '1' ) {
         userInterfaceDisplayUpdateMode1();
 
-    } else if ( readPartyMode() == 2 ) {
+    } else if ( readPartyMode() == '2' ) {
         userInterfaceDisplayUpdateMode2();
 
-    } else if ( readPartyMode() == 3 ) {
+    } else if ( readPartyMode() == '3' ) {
         userInterfaceDisplayUpdateMode3();
     }
 }
@@ -161,10 +163,11 @@ static void UserInterfaceDisplayUpdateMode1()
     displayStringWrite( "NA" );
 
     char lightingString[1] = "";
-
+    /*
     sprintf(lightingString, "%f", colorNumbertoLetter(readMode1Color()));
     displayCharPositionWrite( 10,1 );
     displayStringWrite( lightingString );
+    */
 }
 
 static void UserInterfaceDisplayUpdateMode2()
@@ -177,11 +180,12 @@ static void UserInterfaceDisplayUpdateMode2()
 
 static void UserInterfaceDisplayUpdateMode3()
 {
+    /*
     char songString[2] = "";
     sprintf(songString, "%f", readSong());
     displayCharPositionWrite ( 14,0 );
     displayStringWrite( songString );
-
+    */
     UserInterfaceDisplayUpdateLightingMode2And3();
 }
 
