@@ -19,6 +19,8 @@
 
 //=====[Declaration and initialization of public global variables]=============
 
+char codeSequenceFromUserInterface[CODE_NUMBER_OF_KEYS];
+
 //=====[Declaration and initialization of private global variables]============
 static char colorPick;
 static char songPick;
@@ -89,17 +91,17 @@ static void userInterfaceDisplayUpdate()
 {
     char modeString[1] = "";
     
-    sprintf(modeString, "%f", readMode());
+    sprintf(modeString, "%f", readPartyMode());
     displayCharPositionWrite ( 6,0 );
     displayStringWrite( modeString );
 
-    if ( readMode() == 1 ) {
+    if ( readPartyMode() == 1 ) {
         userInterfaceDisplayUpdateMode1();
 
-    } else if ( readMode() == 2 ) {
+    } else if ( readPartyMode() == 2 ) {
         userInterfaceDisplayUpdateMode2();
 
-    } else if ( readMode() == 3 ) {
+    } else if ( readPartyMode() == 3 ) {
         userInterfaceDisplayUpdateMode3();
     }
 }
@@ -127,28 +129,29 @@ static void userInterfaceDisplayInit()
 
 
 
-static char colorNumberToLetter(int indexColor);
+static char colorNumberToLetter();
 {
+    char colorNumber = readMode1Color();
     char colorLetter = "";
-    if ( color[indexColor] == "1" ) {
+    if ( colorNumber == '1' ) {
         colorLetter = "R";
         }
-    if ( color[indexColor] == "2" ) {
+    if ( colorNumber == '2' ) {
         colorLetter = "Y";
         }
-    if ( color[indexColor] == "3" ) {
+    if ( colorNumber == '3' ) {
         colorLetter = "G";
         }
-    if ( color[indexColor] == "4" ) {
+    if ( colorNumber == '4' ) {
         colorLetter = "B";
         }
-    if ( color[indexColor] == "5" ) {
+    if ( colorNumber == '5' ) {
         colorLetter = "I";
         }
-    if ( color[indexColor] == "6" ) {
+    if ( colorNumber == '6' ) {
         colorLetter = "P";
         }
-    if ( color[indexColor] == "7" ) {
+    if ( colorNumber == '7' ) {
         colorLetter = "W";
         }
     return colorLetter;
@@ -161,7 +164,7 @@ static void UserInterfaceDisplayUpdateMode1()
 
     char lightingString[1] = "";
 
-    sprintf(lightingString, "%f", colorNumbertoLetter(readColor1()));
+    sprintf(lightingString, "%f", colorNumbertoLetter(readMode1Color()));
     displayCharPositionWrite( 10,1 );
     displayStringWrite( lightingString );
 }
@@ -177,7 +180,7 @@ static void UserInterfaceDisplayUpdateMode2()
 static void UserInterfaceDisplayUpdateMode3()
 {
     char songString[2] = "";
-    sprintf(songString, "%f", songRead());
+    sprintf(songString, "%f", readSong());
     displayCharPositionWrite ( 14,0 );
     displayStringWrite( songString );
 
