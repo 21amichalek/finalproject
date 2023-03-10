@@ -22,7 +22,7 @@ bool songPlaying;
 
 static float musicPeriod = 0.0001;
 static float musicDutyCycle = 0.5;
-static int accumulatedTime = 0;
+static int accumulatedTime;
 static int timeIncrement = 10;
 
 
@@ -37,6 +37,7 @@ void musicInit(){
     setMusicPeriod(musicPeriod);                                       
     setMusicDutyCycle(musicDutyCycle);
     songPlaying = true;
+    accumulatedTime = 0;
 }
 
 
@@ -46,28 +47,27 @@ void songPlayingWrite( bool state ){
 
 //hot cross bums
 void playSong1(){
-        accumulatedTime = 0;
         if (accumulatedTime < 1000 ){
-            setMusicDutyCycle(0.25);
+            setMusicDutyCycle(1);
             accumulatedTime += timeIncrement;
         }
-        if ( 1000 < accumulatedTime < 2000){
+        if ( 1000 < accumulatedTime && accumulatedTime < 2000){
             setMusicDutyCycle(0.15);
             accumulatedTime += timeIncrement;
         }
-        if (2000 < accumulatedTime < 4000){
+        if (2000 < accumulatedTime && accumulatedTime < 4000){
             setMusicDutyCycle(0.05);
             accumulatedTime += timeIncrement;
         }
-        if (4000 < accumulatedTime < 5000){
+        if (4000 < accumulatedTime && accumulatedTime < 5000){
             setMusicDutyCycle(0.25);
             accumulatedTime += timeIncrement;
         }
-        if (5000 < accumulatedTime < 6000){
+        if (5000 < accumulatedTime && accumulatedTime < 6000){
             setMusicDutyCycle(0.15);
             accumulatedTime += timeIncrement;
         }
-        if (6000 < accumulatedTime < 8000){
+        if (6000 < accumulatedTime && accumulatedTime < 8000){
             setMusicDutyCycle(0.05);
             accumulatedTime += timeIncrement;
         }
@@ -113,13 +113,13 @@ void playSong4(){
     while (songPlaying){
         setMusicDutyCycle(0.15);
         delay(1000);
+        setMusicDutyCycle(1);;
+        delay(1000);
+        setMusicDutyCycle(0.05);
+        delay(1000);
+        setMusicDutyCycle(1);;
+        delay(1000);
         setMusicDutyCycle(0.25);
-        delay(1000);
-        setMusicDutyCycle(0.35);
-        delay(1000);
-        setMusicDutyCycle(0.25);
-        delay(1000);
-        setMusicDutyCycle(0.15);
         delay(3000);
     }
 }
