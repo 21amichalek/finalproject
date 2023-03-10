@@ -188,21 +188,6 @@ static void UserInterfaceDisplayUpdateMode3()
 
 static void UserInterfaceDisplayUpdateLightingMode2And3()
 {
-    char lighting1String[1] = "";
-
-    sprintf(lighting1String, "%f", colorNumbertoLetter(readColor1()));
-    displayCharPositionWrite( 10,1 );
-    displayStringWrite( lighting1String );
-
-    char lighting2String[1] = "";
-
-    sprintf(lighting2String, "%f", colorNumbertoLetter(readColor2()));
-    displayCharPositionWrite( 11,1 );
-    displayStringWrite( lighting2String );
-
-    char lighting3String[1] = "";
-
-    sprintf(lighting3String, "%f", colorNumbertoLetter(readColor3()));
-    displayCharPositionWrite( 12,1 );
-    displayStringWrite( lighting3String );
+    displayCharPositionWrite ( 10,1 );
+    displayStringWrite( "RGP" );
 }
