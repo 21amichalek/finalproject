@@ -116,9 +116,9 @@ void pcSerialComCodeCompleteWrite( bool state )
     codeComplete = state;
 }
 
-int readMode()
-{
-    return modeState;
+char pMode = '\0';
+char readPartyMode() {
+    return pMode;
 }
 
 //=====[Implementations of private functions]==================================
@@ -163,9 +163,9 @@ static void pcSerialComSaveNewCodeUpdate( char receivedChar )
 static void pcSerialComCommandUpdate( char receivedChar )
 {
     switch (receivedChar) {
-        case '1': commandChillState(); break;
-        case '2': commandPartyState(); break;
-        case '3': commandRaveState(); break;
+        case '1': pMode = receivedChar; break;
+        case '2': pMode = receivedChar; break;
+        case '3': pMode = receivedChar; break;
         case 'i': case 'I': commandGetInformation(); break;
         case 'k': case 'K': commandShowKeys(); break;
         default: instructions(); break;
