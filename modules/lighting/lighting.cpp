@@ -1,7 +1,6 @@
 #include "arm_book_lib.h"
 #include "mbed.h"
 #include "lighting.h"
-#include "smart_home_system.h"
 
 //=====[Declaration of private defines]========================================
 #define strobeTime 1000
