@@ -24,6 +24,7 @@
 
 //=====[Implementations of public functions]===================================
 
+
 void entertainmentSystemInit()
 {
     userInterfaceInit();
@@ -31,11 +32,11 @@ void entertainmentSystemInit()
     PartyInit();
 }
 
-void smartHomeSystemUpdate()
+void entertainmentSystemUpdate()
 {
     userInterfaceUpdate();
     pcSerialComUpdate();
-    partyUpdate();
+    PartyUpdate();
     delay(SYSTEM_TIME_INCREMENT_MS);
 }
 
