@@ -19,8 +19,6 @@
 
 //=====[Declaration and initialization of public global variables]=============
 
-char codeSequenceFromUserInterface[CODE_NUMBER_OF_KEYS];
-
 //=====[Declaration and initialization of private global variables]============
 static char colorPick;
 static char songPick;
