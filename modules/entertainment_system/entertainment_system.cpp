@@ -6,6 +6,7 @@
 
 #include "user_interface.h"
 #include "party_features.h"
+#include "pc_serial_com.h"
 
 //=====[Declaration of private defines]========================================
 
@@ -26,13 +27,15 @@
 void entertainmentSystemInit()
 {
     userInterfaceInit();
+    pcSerialComInit();
     PartyInit();
 }
 
 void smartHomeSystemUpdate()
 {
     userInterfaceUpdate();
-    PartyUpdate();
+    pcSerialComUpdate();
+    partyUpdate();
     delay(SYSTEM_TIME_INCREMENT_MS);
 }
 
