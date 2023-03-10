@@ -27,7 +27,7 @@ Once the mode has been chosen, the user can further customize the party by selec
 
 #### Songs
 - 1: Hot Cross Buns --> A
-- 2: An Original --> B
+- 2: Twinkle Twinkle Little Star --> B
 - 3: Happy Birthday --> C
 - 4: Mary Had a Little Lamb --> D
 
@@ -54,7 +54,7 @@ This module manages the communication with the PC through sending / receiving da
 This module drives the light implemented by an RGB LED.
     
 #### Music --- written from scratch
-This module drives the songs played by an active buzzer.
+This module drives the songs played by a passive buzzer.
     
 #### LDR Sensor --- based on textbook LDR Sensor module
 This module reads the output given by a LDR sensor.
@@ -71,7 +71,7 @@ The hardware this system requires and the pin connections are shown in the schem
 ![Hardware Schematic](https://lh3.googleusercontent.com/kEasagN08I37e5mX_3HTPFbunfxhqe9EgBodsjEhgqVYuyBt04OjoYGvARiIrNsAxBQx2bYkxcrl-uSowxyZJbQ8Qk8oaPN85uCqph3TpQ)
 *The LEDs in the schematic are facing the wrong direction*
 
-*The passive buzzer has been replaced by an active buzzer that is connected to the PE_14 pin*
+*The passive buzzer is connected to the PE_14 pin*
 
 Each component shown in the schematic is listed below, along with their corresponding pin connections to the NUCLEO board:
 #### - 4x4 Matrix Keypad
@@ -104,7 +104,7 @@ Each component shown in the schematic is listed below, along with their correspo
   - Green --> 150 resistor --> PA_0
   - Blue --> 130 resistor --> PD_12
   - GND --> GND
-#### - Active Buzzer
+#### - Passive Buzzer
   - positive --> 5V
   - negative --> PE_14
 #### - LDR Sensor
