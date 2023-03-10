@@ -10,9 +10,9 @@ Summary of Behavior
 The integrated entertainment system is the future of party entertainment! Lighting and music are brought together in an all-in-one, personalizable system. This system allows for party customization through the use of multiple party modes. The modes will be chosen by the user and can be further customized to fit the specific vibe of the party. The user can personalize the party by choosing different colored lights, strobe intensity, and sounds. If the party needs to be paused for any reason, there is a single input that stops all activities.
 
 The three different party modes are chosen through the serial monitor. The user can select from the following options by pressing the corresponding number key on their computer keyboard:
-#### Mode 1: Chill ----- single colored lighting
+#### Mode 1: Chill ----- single colored customizable lighting
 #### Mode 2: Party ----- slow flashing multiple colored lighting
-#### Mode 3: Rave ------- fast flashing multiple colored lighting and music
+#### Mode 3: Rave ------- fast flashing multiple colored lighting and customizable music
 
 Once the mode has been chosen, the user can further customize the party by selecting keys on the matrix keypad to select colors of lighting and songs, when applicable. Each key on the keypad corresponds with a color of lighting or song. Seven different colors and four songs can be chosen. The comprehensive instructions of this correspondence can be read through the serial monitor. The lighting colors and song choices are shown below with their associated key on the matrix keypad:
 
