@@ -25,8 +25,6 @@ UnbufferedSerial uartUsb(USBTX, USBRX, 115200);
 
 //=====[Declaration and initialization of public global variables]=============
 
-char codeSequenceFromPcSerialCom[CODE_NUMBER_OF_KEYS];
-
 //=====[Declaration and initialization of private global variables]============
 
 static pcSerialComMode_t pcSerialComMode = PC_SERIAL_COMMANDS;
