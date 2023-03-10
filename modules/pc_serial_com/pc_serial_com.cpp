@@ -2,7 +2,10 @@
 
 #include "mbed.h"
 #include "arm_book_lib.h"
+
 #include "pc_serial_com.h"
+
+#include "code.h"
 #include "party_features.h"
 #include "lighting.h"
 #include "music.h"
@@ -30,17 +33,12 @@ char codeSequenceFromPcSerialCom[CODE_NUMBER_OF_KEYS];
 //=====[Declaration and initialization of private global variables]============
 
 static pcSerialComMode_t pcSerialComMode = PC_SERIAL_COMMANDS;
-static bool codeComplete = false;
-static int numberOfCodeChars = 0;
 
 int modeState = 0;
 
+char pMode = '\0';
+
 //=====[Declarations (prototypes) of private functions]========================
-
-static void pcSerialComStringRead( char* str, int strLength );
-
-static void pcSerialComGetCodeUpdate( char receivedChar );
-static void pcSerialComSaveNewCodeUpdate( char receivedChar );
 
 static void pcSerialComCommandUpdate( char receivedChar );
 
@@ -103,59 +101,12 @@ void pcSerialComUpdate()
     }    
 }
 
-bool pcSerialComCodeCompleteRead()
+char readPartyMode()
 {
-    return codeComplete;
-}
-
-void pcSerialComCodeCompleteWrite( bool state )
-{
-    codeComplete = state;
-}
-
-char pMode = '\0';
-char readPartyMode() {
     return pMode;
 }
 
 //=====[Implementations of private functions]==================================
-
-static void pcSerialComStringRead( char* str, int strLength )
-{
-    int strIndex;
-    for ( strIndex = 0; strIndex < strLength; strIndex++) {
-        uartUsb.read( &str[strIndex] , 1 );
-        uartUsb.write( &str[strIndex] ,1 );
-    }
-    str[strLength]='\0';
-}
-
-static void pcSerialComGetCodeUpdate( char receivedChar )
-{
-    codeSequenceFromPcSerialCom[numberOfCodeChars] = receivedChar;
-    pcSerialComStringWrite( "*" );
-    numberOfCodeChars++;
-   if ( numberOfCodeChars >= CODE_NUMBER_OF_KEYS ) {
-        pcSerialComMode = PC_SERIAL_COMMANDS;
-        codeComplete = true;
-        numberOfCodeChars = 0;
-    } 
-}
-
-static void pcSerialComSaveNewCodeUpdate( char receivedChar )
-{
-    static char newCodeSequence[CODE_NUMBER_OF_KEYS];
-
-    newCodeSequence[numberOfCodeChars] = receivedChar;
-    pcSerialComStringWrite( "*" );
-    numberOfCodeChars++;
-    if ( numberOfCodeChars >= CODE_NUMBER_OF_KEYS ) {
-        pcSerialComMode = PC_SERIAL_COMMANDS;
-        numberOfCodeChars = 0;
-        codeWrite( newCodeSequence );
-        pcSerialComStringWrite( "\r\nNew code configured\r\n\r\n" );
-    } 
-}
 
 static void pcSerialComCommandUpdate( char receivedChar )
 {
@@ -235,15 +186,12 @@ static void setColorInstructionsMode1()
 
 static void setColorInstructionsMode2And3()
 {
-    pcSerialComStringWrite( "Now you may select three colors of lighting on the keypad.\r\n");
-    pcSerialComStringWrite( "Press the according keys on the keypad for the desired lighting:\r\n\r\n");
-    
-    lightingMatrixKeysInstructions();
+    pcSerialComStringWrite( "The lights will now flash between red, green, and purple colors.\r\n\r\n");
 }
 
 static void setSongInstructions()
 {
-    pcSerialComStringWrite( "Now you may select a song on the keypad.\r\n");
+    pcSerialComStringWrite( "You may select a song on the keypad.\r\n");
     pcSerialComStringWrite( "Press the according key on the keypad for the desired music:\r\n\r\n");
     
     musicMatrixKeysInstructions();
@@ -254,10 +202,10 @@ static void lightingMatrixKeysInstructions()
     pcSerialComStringWrite( "Lighting Colors:\r\n");
     pcSerialComStringWrite( "----------------\r\n");
     pcSerialComStringWrite( "Red: press '1'\r\n");
-    pcSerialComStringWrite( "Orange: press '2'\r\n");
-    pcSerialComStringWrite( "Yellow: press '3'\r\n");
-    pcSerialComStringWrite( "Green: press '4'\r\n");
-    pcSerialComStringWrite( "Blue: press '5'\r\n");
+    pcSerialComStringWrite( "Yellow: press '2'\r\n");
+    pcSerialComStringWrite( "Green: press '3'\r\n");
+    pcSerialComStringWrite( "Blue: press '4'\r\n");
+    pcSerialComStringWrite( "Indigo: press '5'\r\n");
     pcSerialComStringWrite( "Purple: press '6'\r\n");
     pcSerialComStringWrite( "White: press '7'\r\n\r\n");
 }
