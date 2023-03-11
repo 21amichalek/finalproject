@@ -1,6 +1,8 @@
 #include "arm_book_lib.h"
 #include "mbed.h"
+
 #include "lighting.h"
+
 #include "entertainment_system.h"
 
 //=====[Declaration of private defines]========================================
@@ -142,4 +144,3 @@ static void setPeriod( lightSystem_t light, float period )
 {
     RGBLed[light].period(period);
 }
-
