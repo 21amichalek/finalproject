@@ -7,12 +7,10 @@
 
 //=====[Declaration of public data types]======================================
 
-
-
 //=====[Declarations (prototypes) of public functions]=========================
+
 void PartyInit();
 void PartyUpdate();
-
 
 //=====[#include guards - end]=================================================
 
