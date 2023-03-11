@@ -24,7 +24,6 @@
 
 //=====[Implementations of public functions]===================================
 
-
 void entertainmentSystemInit()
 {
     userInterfaceInit();
