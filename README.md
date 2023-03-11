@@ -71,8 +71,6 @@ The hardware this system requires and the pin connections are shown in the schem
 ![Hardware Schematic](https://lh3.googleusercontent.com/kEasagN08I37e5mX_3HTPFbunfxhqe9EgBodsjEhgqVYuyBt04OjoYGvARiIrNsAxBQx2bYkxcrl-uSowxyZJbQ8Qk8oaPN85uCqph3TpQ)
 *The LEDs in the schematic are facing the wrong direction*
 
-*The passive buzzer is connected to the PE_14 pin*
-
 Each component shown in the schematic is listed below, along with their corresponding pin connections to the NUCLEO board:
 #### - 4x4 Matrix Keypad
   - R1 --> PB_3
@@ -106,7 +104,7 @@ Each component shown in the schematic is listed below, along with their correspo
   - GND --> GND
 #### - Passive Buzzer
   - positive --> 5V
-  - negative --> PE_14
+  - negative --> PB_11
 #### - LDR Sensor
   - positive --> 3.3V
   - negative --> A2 and 10k resistor --> GND
