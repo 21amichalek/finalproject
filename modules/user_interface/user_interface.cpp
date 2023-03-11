@@ -21,12 +21,11 @@
 //=====[Declaration and initialization of public global variables]=============
 
 //=====[Declaration and initialization of private global variables]============
+
 static char colorPick;
 static char songPick;
 static displayState_t displayState = DISPLAY_REPORT_STATE;
 static int displayRefreshTimeMs = DISPLAY_REFRESH_TIME_REPORT_MS;
-
-
 
 //=====[Declarations (prototypes) of private functions]========================
 
@@ -35,8 +34,6 @@ static void songUpdate();
 
 static void userInterfaceDisplayInit();
 static void userInterfaceDisplayUpdate();
-
-static char colorNumberToLetter(int indexColor);
 
 static void UserInterfaceDisplayUpdateMode1();
 static void UserInterfaceDisplayUpdateMode2();
@@ -67,8 +64,8 @@ char readSong(){
     return songPick;
 }
 
-
 //=====[Implementations of private functions]==================================
+
 static void Mode1ColorUpdate()
 {
     char keyReleased = matrixKeypadUpdate();
@@ -88,19 +85,19 @@ static void songUpdate() {
 
 static void userInterfaceDisplayUpdate()
 {
-    char modeString[1] = "";
-    /*
-    sprintf(modeString, "%f", readPartyMode());
-    displayCharPositionWrite ( 6,0 );
-    displayStringWrite( modeString );
-*/
     if ( readPartyMode() == '1' ) {
+        displayCharPositionWrite ( 6,0 );
+        displayStringWrite( "1" );
         UserInterfaceDisplayUpdateMode1();
 
     } else if ( readPartyMode() == '2' ) {
+        displayCharPositionWrite ( 6,0 );
+        displayStringWrite( "2" );
         UserInterfaceDisplayUpdateMode2();
 
     } else if ( readPartyMode() == '3' ) {
+        displayCharPositionWrite ( 6,0 );
+        displayStringWrite( "3" );
         UserInterfaceDisplayUpdateMode3();
     }
 }
@@ -126,46 +123,41 @@ static void userInterfaceDisplayInit()
     displayStringWrite( "Song: " );
 }
 
-
-
-static char colorNumberToLetter(){
-    char colorNumber = readMode1Color();
-    char colorLetter = "";
-    if ( colorNumber == '1' ) {
-        colorLetter = "R";
-        }
-    if ( colorNumber == '2' ) {
-        colorLetter = "Y";
-        }
-    if ( colorNumber == '3' ) {
-        colorLetter = "G";
-        }
-    if ( colorNumber == '4' ) {
-        colorLetter = "B";
-        }
-    if ( colorNumber == '5' ) {
-        colorLetter = "I";
-        }
-    if ( colorNumber == '6' ) {
-        colorLetter = "P";
-        }
-    if ( colorNumber == '7' ) {
-        colorLetter = "W";
-        }
-    return colorLetter;
-}
-
 static void UserInterfaceDisplayUpdateMode1()
 {
     displayCharPositionWrite( 14,0 );
-    displayStringWrite( "NA" );
+    displayStringWrite( "NA" );  // this writes that there is no song playing
+    
+    char colorNumber = readMode1Color();
 
-    char lightingString[1] = "";
-    /*
-    sprintf(lightingString, "%f", colorNumbertoLetter(readMode1Color()));
-    displayCharPositionWrite( 10,1 );
-    displayStringWrite( lightingString );
-    */
+    if ( colorNumber == '1' ) {
+        displayCharPositionWrite ( 10,1 );
+        displayStringWrite( "R" );
+        }
+    if ( colorNumber == '2' ) {
+        displayCharPositionWrite ( 10,1 );
+        displayStringWrite( "Y" );
+        }
+    if ( colorNumber == '3' ) {
+        displayCharPositionWrite ( 10,1 );
+        displayStringWrite( "G" );
+        }
+    if ( colorNumber == '4' ) {
+        displayCharPositionWrite ( 10,1 );
+        displayStringWrite( "B" );
+        }
+    if ( colorNumber == '5' ) {
+        displayCharPositionWrite ( 10,1 );
+        displayStringWrite( "I" );
+        }
+    if ( colorNumber == '6' ) {
+        displayCharPositionWrite ( 10,1 );
+        displayStringWrite( "P" );
+        }
+    if ( colorNumber == '7' ) {
+        displayCharPositionWrite ( 10,1 );
+        displayStringWrite( "W" );
+        }
 }
 
 static void UserInterfaceDisplayUpdateMode2()
@@ -178,12 +170,23 @@ static void UserInterfaceDisplayUpdateMode2()
 
 static void UserInterfaceDisplayUpdateMode3()
 {
-    /*
-    char songString[2] = "";
-    sprintf(songString, "%f", readSong());
-    displayCharPositionWrite ( 14,0 );
-    displayStringWrite( songString );
-    */
+    if ( readSong() == 'A' ) {
+        displayCharPositionWrite ( 14,0 );
+        displayStringWrite( "1" );
+
+    } else if ( readSong() == 'B' ) {
+        displayCharPositionWrite ( 14,0 );
+        displayStringWrite( "2" );
+
+    } else if ( readSong() == 'C' ) {
+        displayCharPositionWrite ( 14,0 );
+        displayStringWrite( "3" );
+
+    } else if ( readSong() == 'D' ) {
+        displayCharPositionWrite ( 14,0 );
+        displaySpringWrite( "4" );
+    }
+
     UserInterfaceDisplayUpdateLightingMode2And3();
 }
 
