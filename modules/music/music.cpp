@@ -11,7 +11,7 @@
 
 //=====[Declaration of private data types]=====================================
 
-PwmOut musicPin(PE_14);
+PwmOut musicPin(PB_11);
 
 //=====[Declaration and initialization of public global objects]===============
 
@@ -44,7 +44,7 @@ static void setMusicPeriod(float period);
 //set period and duty cycle
 void musicInit(){
     setMusicPeriod(musicPeriod);                                       
-    setMusicDutyCycle(musicDutyCycle);
+    setMusicDutyCycle(dutyCycleOff);
     songPlaying = true;
     accumulatedTime = 0;
 }
@@ -55,6 +55,7 @@ void songPlayingWrite( bool state ){
 
 //hot cross buns
 void playSong1(){
+    setMusicDutyCycle(musicDutyCycle);
     if (accumulatedTime < 1000 ){
         musicPin.period(B);
         accumulatedTime += TIME_INCREMENT;
@@ -87,6 +88,7 @@ void playSong1(){
 // twinkle twinkle little star
 // ccggaag
 void playSong2(){
+    setMusicDutyCycle(musicDutyCycle);
     if (accumulatedTime < 1000 ){
         musicPin.period(C);
         accumulatedTime += TIME_INCREMENT;
@@ -123,6 +125,7 @@ void playSong2(){
 //happy birthday
 //ccdcfe
 void playSong3(){
+    setMusicDutyCycle(musicDutyCycle);
     if (accumulatedTime < 1000 ){
         musicPin.period(C);
         accumulatedTime += TIME_INCREMENT;
@@ -155,6 +158,7 @@ void playSong3(){
 //mary had a little lamb
 //E D C D E E E
 void playSong4(){
+    setMusicDutyCycle(musicDutyCycle);
     if (accumulatedTime < 1000 ){
         musicPin.period(E);
         accumulatedTime += TIME_INCREMENT;
@@ -211,9 +215,11 @@ void setMusic(char song){
             playSong4();
         break;
     }
-
 }
 
+void stopMusic() {
+    setMusicDutyCycle(dutyCycleOff);
+}
 //vary frequency but constant duty cycle
 //changes the note 
 
