@@ -14,7 +14,7 @@
 
 //=====[Declaration of private defines]========================================
 
-#define MAX_VOLTAGE_PARTY_STOP 0.4
+#define MAX_VOLTAGE_PARTY_STOP 0.7
 
 //=====[Declaration of private data types]=====================================
 
@@ -45,6 +45,7 @@ static bool partyStop();
 
 void PartyInit(){
     brightControlInit();
+    musicInit();
     if (!partyStop()) {
         PartyState = PARTY_MODE_SCANNING;
     }
@@ -69,7 +70,7 @@ void PartyUpdate(){
         break;
 
     case PARTY_MODE_1:
-        mode1Color(readMode1Color());
+        mode1Color(readMatrixInput());
         if ( partyStop() ) {
             PartyState = PARTY_OFF;
         }
@@ -87,7 +88,7 @@ void PartyUpdate(){
          if ( partyStop() ) {
             PartyState = PARTY_OFF;
         }
-        setMusic(readSong()); 
+        setMusic(readMatrixInput()); 
         break;
     }
 }
