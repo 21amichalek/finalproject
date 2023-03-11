@@ -2,9 +2,9 @@
 
 #include "mbed.h"
 #include "arm_book_lib.h"
+
 #include "user_interface.h"
-#include "lighting.h"
-#include "music.h"
+
 #include "display.h"
 #include "matrix_keypad.h"
 #include "pc_serial_com.h"
@@ -30,6 +30,7 @@ typedef enum {
 
 static char colorPick;
 static char songPick;
+
 static displayState_t displayState = DISPLAY_REPORT_STATE;
 static int displayRefreshTimeMs = DISPLAY_REFRESH_TIME_REPORT_MS;
 
@@ -65,7 +66,6 @@ char readMode1Color(){
     return colorPick;
 }
 
-
 char readSong(){
     return songPick;
 }
@@ -77,7 +77,6 @@ static void Mode1ColorUpdate()
     char keyReleased = matrixKeypadUpdate();
     if( keyReleased != '\0' ) {
         colorPick = keyReleased;
-        
     }             
 }
 
@@ -85,7 +84,6 @@ static void songUpdate() {
     char keyReleased = matrixKeypadUpdate();
     if( keyReleased != '\0' ) {
         songPick = keyReleased;
-        
     }
  }
 
@@ -111,7 +109,6 @@ static void userInterfaceDisplayUpdate()
 static void userInterfaceDisplayInit()
 {
     displayInit( DISPLAY_TYPE_GLCD_ST7920, DISPLAY_CONNECTION_SPI );
-    // I don't know if we need this but including it for now
     displayState = DISPLAY_REPORT_STATE;
     displayRefreshTimeMs = DISPLAY_REFRESH_TIME_REPORT_MS;
 
@@ -192,7 +189,6 @@ static void UserInterfaceDisplayUpdateMode3()
         displayCharPositionWrite ( 14,0 );
         displayStringWrite( "4" );
     }
-
     UserInterfaceDisplayUpdateLightingMode2And3();
 }
 
