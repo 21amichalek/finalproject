@@ -2,6 +2,7 @@
 
 #include "mbed.h"
 #include "arm_book_lib.h"
+
 #include "music.h"
 
 //=====[Declaration of private defines]========================================
@@ -10,12 +11,12 @@
 
 //=====[Declaration of private data types]=====================================
 
-//bc buzzer and sending a pwm
 PwmOut musicPin(PE_14);
 
 //=====[Declaration and initialization of public global objects]===============
 
 //=====[Declaration of external public global variables]=======================
+
 bool songPlaying;
 
 //=====[Declaration and initialization of private global variables]============
@@ -23,7 +24,9 @@ bool songPlaying;
 static float musicPeriod = 0.0001;
 static float musicDutyCycle = 0.5;
 static float dutyCycleOff = 1.0;
+
 static int accumulatedTime;
+
 static float A = 0.000440;
 static float B = 0.000494;
 static float C = 0.000523; 
@@ -32,9 +35,8 @@ static float E = 0.000659;
 static float G = 0.000784;
 static float F = 0.000698;
 
-
-
 //=====[Declarations (prototypes) of private functions]========================
+
 static void setMusicPeriod(float period);
 
 //=====[Implementations of public functions]===================================
@@ -47,12 +49,11 @@ void musicInit(){
     accumulatedTime = 0;
 }
 
-
 void songPlayingWrite( bool state ){
     songPlaying = state;
 }
 
-//hot cross bums
+//hot cross buns
 void playSong1(){
     if (accumulatedTime < 1000 ){
         musicPin.period(B);
@@ -187,7 +188,6 @@ void playSong4(){
     }
 }
 
-
 //changes the volume 
 void setMusicDutyCycle(float dutyCycle){
     musicPin.write(dutyCycle);
@@ -214,10 +214,9 @@ void setMusic(char song){
 
 }
 
-
 //vary frequency but constant duty cycle
 //changes the note 
+
 static void setMusicPeriod(float period){
     musicPin.period(period);
 }
-
