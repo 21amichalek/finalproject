@@ -11,7 +11,7 @@
 #include "user_interface.h"
 #include "ldr_sensor.h"
 //=====[Declaration of private defines]========================================
-#define MAX_VOLTAGE_PARTY_STOP 0.6
+#define MAX_VOLTAGE_PARTY_STOP 0.9
 //=====[Declaration of private data types]=====================================
 typedef enum {
     PARTY_OFF,
