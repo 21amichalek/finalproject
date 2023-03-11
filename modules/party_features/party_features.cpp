@@ -44,7 +44,7 @@ static bool partyStop();
 //=====[Implementations of public functions]===================================
 
 void PartyInit(){
-    brightControlInit()
+    brightControlInit();
     PartyState = PARTY_MODE_SCANNING;
 }
 
