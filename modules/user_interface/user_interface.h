@@ -12,8 +12,7 @@
 void userInterfaceInit();
 void userInterfaceUpdate();
 
-char readMode1Color();
-char readSong();
+char readMatrixInput();
 
 //=====[#include guards - end]=================================================
 
