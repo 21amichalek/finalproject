@@ -7,6 +7,7 @@
 #include "user_interface.h"
 #include "party_features.h"
 #include "pc_serial_com.h"
+#include "music.h"
 
 //=====[Declaration of private defines]========================================
 
