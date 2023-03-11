@@ -98,9 +98,9 @@ char readPartyMode()
 static void pcSerialComCommandUpdate( char receivedChar )
 {
     switch (receivedChar) {
-        case '1': pMode = receivedChar; break;
-        case '2': pMode = receivedChar; break;
-        case '3': pMode = receivedChar; break;
+        case '1': commandChillState(); break;
+        case '2': commandPartyState(); break;
+        case '3': commandRaveState(); break;
         case 'i': case 'I': commandGetInformation(); break;
         case 'l': case 'L': commandLDRRead(); break;
         case 'k': case 'K': commandShowKeys(); break;
@@ -128,18 +128,24 @@ static void instructions()
 static void commandChillState()
 {
     modeState = 1;
+    pMode = '1';
+    pcSerialComStringWrite( "You have chosen Mode 1: Chill\r\n\r\n" );
     setColorInstructionsMode1();
 }
 
 static void commandPartyState()
 {
     modeState = 2;
+    pMode = '2';
+    pcSerialComStringWrite( "You have chosen Mode 2: Party\r\n\r\n" );
     setColorInstructionsMode2And3();
 }
 
 static void commandRaveState() 
 {
     modeState = 3;
+    pMode = '3';
+    pcSerialComStringWrite( "You have chosen Mode 3: Rave\r\n\r\n" );
     setColorInstructionsMode2And3();
     setSongInstructions();
 }
