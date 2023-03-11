@@ -19,6 +19,7 @@ void playSong3();
 void playSong4();
 
 void setMusic(char song);
+void stopMusic();
 
 //=====[#include guards - end]=================================================
 
