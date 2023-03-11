@@ -12,7 +12,13 @@
 
 //=====[Declaration of private defines]========================================
 
+#define DISPLAY_REFRESH_TIME_REPORT_MS 1000
+
 //=====[Declaration of private data types]=====================================
+
+typedef enum {
+    DISPLAY_REPORT_STATE
+} displayState_t;
 
 //=====[Declaration and initialization of public global objects]===============
 
