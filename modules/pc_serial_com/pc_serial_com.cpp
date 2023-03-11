@@ -6,6 +6,7 @@
 #include "party_features.h"
 #include "lighting.h"
 #include "music.h"
+#include "ldr_sensor.h"
 
 //=====[Declaration of private defines]========================================
 
@@ -45,6 +46,7 @@ static void commandRaveState();
 static void commandGetInformation();
 static void commandShowCustomizationSelection();
 static void commandShowKeys();
+static void commandLDRRead();
 
 static void setColorInstructionsMode1();
 static void setColorInstructionsMode2And3();
@@ -81,14 +83,6 @@ void pcSerialComUpdate()
             case PC_SERIAL_COMMANDS:
                 pcSerialComCommandUpdate( receivedChar );
             break;
-
-            case PC_SERIAL_GET_CODE:
-                pcSerialComGetCodeUpdate( receivedChar );
-            break;
-
-            case PC_SERIAL_SAVE_NEW_CODE:
-                pcSerialComSaveNewCodeUpdate( receivedChar );
-            break;
             default:
                 pcSerialComMode = PC_SERIAL_COMMANDS;
             break;
@@ -110,6 +104,7 @@ static void pcSerialComCommandUpdate( char receivedChar )
         case '2': pMode = receivedChar; break;
         case '3': pMode = receivedChar; break;
         case 'i': case 'I': commandGetInformation(); break;
+        case 'l': case 'L': commandLDRRead(); break;
         case 'k': case 'K': commandShowKeys(); break;
         default: instructions(); break;
     } 
@@ -128,6 +123,7 @@ static void instructions()
     pcSerialComStringWrite( "Press '3' to select Rave\r\n\r\n" );
     pcSerialComStringWrite( "Press 'i' or 'I' to show information about each entertainment mode\r\n" );
     pcSerialComStringWrite( "Press 'k' or 'K' to show the keypad's customization buttons\r\n");
+    pcSerialComStringWrite( "Press 'l' or 'L' to show the LDR reading \r\n");
     pcSerialComStringWrite( "\r\n" );
 }
 
@@ -171,6 +167,13 @@ static void commandShowKeys()
     musicMatrixKeysInstructions();
 }
 
+static void commandLDRRead(){
+    char str[10] = "";
+    pcSerialComStringWrite("LDR: ");
+    sprintf( str, "%0.4f \r\n", ldrSensorRead() );
+    pcSerialComStringWrite( str );
+}
+
 static void setColorInstructionsMode1()
 {
     pcSerialComStringWrite( "Now you may select a color of lighting on the keypad.\r\n");
@@ -212,5 +215,5 @@ static void musicMatrixKeysInstructions()
     pcSerialComStringWrite( "Song 1 - Hot Cross Buns: press 'A'\r\n");
     pcSerialComStringWrite( "Song 2 - An Original: press 'B'\r\n");
     pcSerialComStringWrite( "Song 3 - Happy Birthday: press 'C'\r\n");
-    pcSerialComStringWrite( "Song 1 - Mary Had a Little Lamb: press 'D'\r\n\r\n");
+    pcSerialComStringWrite( "Song 4 - Mary Had a Little Lamb: press 'D'\r\n\r\n");
 }
