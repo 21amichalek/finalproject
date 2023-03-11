@@ -24,16 +24,11 @@
 
 //=====[Declaration and initialization of private global variables]============
 
-static char colorPick;
-static char songPick;
-
-static displayState_t displayState = DISPLAY_REPORT_STATE;
-static int displayRefreshTimeMs = DISPLAY_REFRESH_TIME_REPORT_MS;
+static char matrixInput;
 
 //=====[Declarations (prototypes) of private functions]========================
 
-static void Mode1ColorUpdate();
-static void songUpdate();
+static void matrixInputUpdate();
 
 static void userInterfaceDisplayInit();
 static void userInterfaceDisplayUpdate();
@@ -53,41 +48,29 @@ void userInterfaceInit()
 
 void userInterfaceUpdate()
 {
-    Mode1ColorUpdate();
-    songUpdate();
+    matrixInputUpdate();
     userInterfaceDisplayUpdate();
 }
 
-char readMode1Color(){
-    return colorPick;
-}
-
-char readSong(){
-    return songPick;
+char readMatrixInput(){
+    return matrixInput;
 }
 
 //=====[Implementations of private functions]==================================
 
-static void Mode1ColorUpdate()
+static void matrixInputUpdate()
 {
     char keyReleased = matrixKeypadUpdate();
     if( keyReleased != '\0' ) {
-        colorPick = keyReleased;
+        matrixInput = keyReleased;
     }             
 }
 
-static void songUpdate() {
-    char keyReleased = matrixKeypadUpdate();
-    if( keyReleased != '\0' ) {
-        songPick = keyReleased;
-    }
- }
-
 static void userInterfaceDisplayUpdate()
 {
-    displayInit();
-
-    if ( readPartyMode() == '1' ) {
+    static int accumulatedDisplayTime = 0;
+    if ( accumulatedDisplayTime >= DISPLAY_REFRESH_TIME_MS ) {
+        if ( readPartyMode() == '1' ) {
         displayCharPositionWrite ( 6,0 );
         displayStringWrite( "1" );
         UserInterfaceDisplayUpdateMode1();
@@ -102,23 +85,24 @@ static void userInterfaceDisplayUpdate()
         displayStringWrite( "3" );
         UserInterfaceDisplayUpdateMode3();
     }
+    } else {
+        accumulatedDisplayTime = accumulatedDisplayTime + SYSTEM_TIME_INCREMENT_MS;
+    }
 }
 
 static void userInterfaceDisplayInit()
 {
-    static int accumulatedDisplayTime = 0;
-    if ( accumulatedDisplayTime >= DISPLAY_REFRESH_TIME_MS ) {
-        displayCharPositionWrite ( 0,0 );
-        displayStringWrite( "Mode: " );
+    displayInit();
 
-        displayCharPositionWrite ( 0,1 );
-        displayStringWrite( "Lighting: " );
+    displayCharPositionWrite ( 0,0 );
+    displayStringWrite( "Mode: " );
 
-        displayCharPositionWrite ( 8,0 );
-        displayStringWrite( "Song: " );
-    } else {
-        accumulatedDisplayTime = accumulatedDisplayTime + SYSTEM_TIME_INCREMENT_MS;
-    }
+    displayCharPositionWrite ( 0,1 );
+    displayStringWrite( "Lighting: " );
+
+    displayCharPositionWrite ( 8,0 );
+    displayStringWrite( "Song: " );
+    
 }
 
 static void UserInterfaceDisplayUpdateMode1()
@@ -126,7 +110,7 @@ static void UserInterfaceDisplayUpdateMode1()
     displayCharPositionWrite( 14,0 );
     displayStringWrite( "NA" );  // this writes that there is no song playing
     
-    char colorNumber = readMode1Color();
+    char colorNumber = readMatrixInput();
 
     if ( colorNumber == '1' ) {
         displayCharPositionWrite ( 10,1 );
@@ -168,19 +152,19 @@ static void UserInterfaceDisplayUpdateMode2()
 
 static void UserInterfaceDisplayUpdateMode3()
 {
-    if ( readSong() == 'A' ) {
+    if ( readMatrixInput() == 'A' ) {
         displayCharPositionWrite ( 14,0 );
         displayStringWrite( "1" );
 
-    } else if ( readSong() == 'B' ) {
+    } else if ( readMatrixInput() == 'B' ) {
         displayCharPositionWrite ( 14,0 );
         displayStringWrite( "2" );
 
-    } else if ( readSong() == 'C' ) {
+    } else if ( readMatrixInput() == 'C' ) {
         displayCharPositionWrite ( 14,0 );
         displayStringWrite( "3" );
 
-    } else if ( readSong() == 'D' ) {
+    } else if ( readMatrixInput() == 'D' ) {
         displayCharPositionWrite ( 14,0 );
         displayStringWrite( "4" );
     }
