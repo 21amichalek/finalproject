@@ -2,10 +2,9 @@
 
 #include "mbed.h"
 #include "arm_book_lib.h"
+
 #include "pc_serial_com.h"
-#include "party_features.h"
-#include "lighting.h"
-#include "music.h"
+
 #include "ldr_sensor.h"
 
 //=====[Declaration of private defines]========================================
@@ -29,9 +28,7 @@ UnbufferedSerial uartUsb(USBTX, USBRX, 115200);
 //=====[Declaration and initialization of private global variables]============
 
 static pcSerialComMode_t pcSerialComMode = PC_SERIAL_COMMANDS;
-
 int modeState = 0;
-
 char pMode = '\0';
 
 //=====[Declarations (prototypes) of private functions]========================
@@ -83,6 +80,7 @@ void pcSerialComUpdate()
             case PC_SERIAL_COMMANDS:
                 pcSerialComCommandUpdate( receivedChar );
             break;
+
             default:
                 pcSerialComMode = PC_SERIAL_COMMANDS;
             break;
