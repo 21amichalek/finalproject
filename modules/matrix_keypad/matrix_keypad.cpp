@@ -5,8 +5,6 @@
 
 #include "matrix_keypad.h"
 
-
-
 //=====[Declaration of private defines]========================================
 
 #define MATRIX_KEYPAD_NUMBER_OF_ROWS    4
