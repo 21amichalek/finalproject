@@ -14,7 +14,7 @@
 
 //=====[Declaration of private defines]========================================
 
-#define MAX_VOLTAGE_PARTY_STOP 0.1
+#define MAX_VOLTAGE_PARTY_STOP 0.4
 
 //=====[Declaration of private data types]=====================================
 
@@ -45,7 +45,9 @@ static bool partyStop();
 
 void PartyInit(){
     brightControlInit();
-    PartyState = PARTY_MODE_SCANNING;
+    if (!partyStop()) {
+        PartyState = PARTY_MODE_SCANNING;
+    }
 }
 
 void PartyUpdate(){
