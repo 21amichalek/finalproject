@@ -3,7 +3,7 @@
 
 #### by Team Triple A (Austin Gregory, Abigail Michalek, Ashley Pontillo)
 
-Submitted on 03/10/23
+Submitted on 03/11/23
 
 Summary of Behavior
 -------------------
@@ -45,7 +45,7 @@ This module manages the functionality of all the subsystems.
 This module controls the distinct party modes of the system by implementing their behaviors.
   
 #### User Interface --- modified textbook User Interface module
-This module manages the user interface through controlling the lighting, music, and input           received from the matrix keypad and serial communication.
+This module manages the user interface through controlling the lighting, music, and input received from the matrix keypad and serial communication.
   
 #### PC Serial Communication --- modified textbook PC Serial Communication module
 This module manages the communication with the PC through sending / receiving data.
