@@ -5,8 +5,6 @@
 
 #include "pc_serial_com.h"
 
-#include "ldr_sensor.h"
-
 //=====[Declaration of private defines]========================================
 
 //=====[Declaration of private data types]=====================================
@@ -102,7 +100,6 @@ static void pcSerialComCommandUpdate( char receivedChar )
         case '2': commandPartyState(); break;
         case '3': commandRaveState(); break;
         case 'i': case 'I': commandGetInformation(); break;
-        case 'l': case 'L': commandLDRRead(); break;
         case 'k': case 'K': commandShowKeys(); break;
         default: instructions(); break;
     } 
@@ -121,7 +118,6 @@ static void instructions()
     pcSerialComStringWrite( "Press '3' to select Rave\r\n\r\n" );
     pcSerialComStringWrite( "Press 'i' or 'I' to show information about each entertainment mode\r\n" );
     pcSerialComStringWrite( "Press 'k' or 'K' to show the keypad's customization buttons\r\n");
-    pcSerialComStringWrite( "Press 'l' or 'L' to show the LDR reading \r\n");
     pcSerialComStringWrite( "\r\n" );
 }
 
@@ -157,9 +153,9 @@ static void commandGetInformation()
     pcSerialComStringWrite( "Mode 1: Chill\r\n");
     pcSerialComStringWrite( "Select a color of lighting\r\n\r\n");
     pcSerialComStringWrite( "Mode 2: Party\r\n");
-    pcSerialComStringWrite( "Select three colors of slow flashing lighting\r\n\r\n");
-    pcSerialComStringWrite( "Mode 1: Rave\r\n");
-    pcSerialComStringWrite( "Select three colors of fast flashing lighting\r\n");
+    pcSerialComStringWrite( "Three colors of slow flashing lighting\r\n\r\n");
+    pcSerialComStringWrite( "Mode 3: Rave\r\n");
+    pcSerialComStringWrite( "Three colors of fast flashing lighting\r\n");
     pcSerialComStringWrite( "and\r\n");
     pcSerialComStringWrite( "Select a song to be played\r\n\r\n");
 }
@@ -169,13 +165,6 @@ static void commandShowKeys()
     pcSerialComStringWrite( "To select a lighting color or song, press the according key on the keypad:\r\n\r\n");
     lightingMatrixKeysInstructions();
     musicMatrixKeysInstructions();
-}
-
-static void commandLDRRead(){
-    char str[10] = "";
-    pcSerialComStringWrite("LDR: ");
-    sprintf( str, "%0.4f \r\n", ldrSensorRead() );
-    pcSerialComStringWrite( str );
 }
 
 static void setColorInstructionsMode1()
