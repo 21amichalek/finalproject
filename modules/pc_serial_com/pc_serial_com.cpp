@@ -213,7 +213,7 @@ static void musicMatrixKeysInstructions()
     pcSerialComStringWrite( "Songs:\r\n");
     pcSerialComStringWrite( "----------------\r\n");
     pcSerialComStringWrite( "Song 1 - Hot Cross Buns: press 'A'\r\n");
-    pcSerialComStringWrite( "Song 2 - An Original: press 'B'\r\n");
+    pcSerialComStringWrite( "Song 2 - Twinkle Twinkle Little Star: press 'B'\r\n");
     pcSerialComStringWrite( "Song 3 - Happy Birthday: press 'C'\r\n");
     pcSerialComStringWrite( "Song 4 - Mary Had a Little Lamb: press 'D'\r\n\r\n");
 }
