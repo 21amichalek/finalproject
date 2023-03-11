@@ -12,13 +12,9 @@
 
 //=====[Declaration of private defines]========================================
 
-#define DISPLAY_REFRESH_TIME_REPORT_MS 1000
+#define DISPLAY_REFRESH_TIME_MS 1000
 
 //=====[Declaration of private data types]=====================================
-
-typedef enum {
-    DISPLAY_REPORT_STATE
-} displayState_t;
 
 //=====[Declaration and initialization of public global objects]===============
 
@@ -89,6 +85,8 @@ static void songUpdate() {
 
 static void userInterfaceDisplayUpdate()
 {
+    displayInit();
+
     if ( readPartyMode() == '1' ) {
         displayCharPositionWrite ( 6,0 );
         displayStringWrite( "1" );
@@ -108,22 +106,19 @@ static void userInterfaceDisplayUpdate()
 
 static void userInterfaceDisplayInit()
 {
-    displayInit( DISPLAY_TYPE_GLCD_ST7920, DISPLAY_CONNECTION_SPI );
-    displayState = DISPLAY_REPORT_STATE;
-    displayRefreshTimeMs = DISPLAY_REFRESH_TIME_REPORT_MS;
+    static int accumulatedDisplayTime = 0;
+    if ( accumulatedDisplayTime >= DISPLAY_REFRESH_TIME_MS ) {
+        displayCharPositionWrite ( 0,0 );
+        displayStringWrite( "Mode: " );
 
-    displayModeWrite( DISPLAY_MODE_CHAR );
+        displayCharPositionWrite ( 0,1 );
+        displayStringWrite( "Lighting: " );
 
-    displayClear();
-
-    displayCharPositionWrite ( 0,0 );
-    displayStringWrite( "Mode: " );
-
-    displayCharPositionWrite ( 0,1 );
-    displayStringWrite( "Lighting: " );
-
-    displayCharPositionWrite ( 8,0 );
-    displayStringWrite( "Song: " );
+        displayCharPositionWrite ( 8,0 );
+        displayStringWrite( "Song: " );
+    } else {
+        accumulatedDisplayTime = accumulatedDisplayTime + SYSTEM_TIME_INCREMENT_MS;
+    }
 }
 
 static void UserInterfaceDisplayUpdateMode1()
