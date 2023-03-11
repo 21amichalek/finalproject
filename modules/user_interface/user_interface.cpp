@@ -190,7 +190,7 @@ static void UserInterfaceDisplayUpdateMode3()
 
     } else if ( readSong() == 'D' ) {
         displayCharPositionWrite ( 14,0 );
-        displaySpringWrite( "4" );
+        displayStringWrite( "4" );
     }
 
     UserInterfaceDisplayUpdateLightingMode2And3();
