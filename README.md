@@ -119,4 +119,5 @@ A description of the tests you performed on the system, and the results.
 Other Details
 -------------
 The music modules uses varying frequncies to change the sound output of the buzzer. Each freuqueny is assigned to a variable representing the note it should resemble. The notes we use were found in a github .h file used where the purpose of their project is to have a buzzer play different songs through aurduino. We only used their frequency values for the notes and did utilie and other functions or libraries. 
+
 Link to .h file with notes: https://github.com/bhagman/Tone/blob/master/Tone.h
