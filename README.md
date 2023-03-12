@@ -113,8 +113,9 @@ Each component shown in the schematic is listed below, along with their correspo
 
 Tests Performed
 ---------------
-WRITE LATER
-A description of the tests you performed on the system, and the results.
+
+![1](https://user-images.githubusercontent.com/124914390/224519529-4d49c292-bdd5-41dd-8803-f6b53bb91df5.jpg)
+
 
 Other Details
 -------------
